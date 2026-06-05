@@ -3,605 +3,500 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Champions Academy — Where kids find their champion within</title>
+<title>The Social Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --ink: #0a1a3a;
-    --ink-soft: #475569;
-    --ink-mute: #94a3b8;
-    --royal: #2563eb;
-    --royal-deep: #1d4ed8;
-    --royal-pale: #dbeafe;
-    --coral: #ff4d6d;
-    --coral-soft: #ff7a92;
-    --sun: #ffd60a;
-    --sun-deep: #f59e0b;
-    --cloud: #f8fafc;
-    --line: #e6eaf3;
-    --white: #ffffff;
-    --display: 'Archivo', system-ui, sans-serif;
-    --sans: 'Inter', system-ui, sans-serif;
-    --shadow: 0 8px 32px rgba(10,26,58,0.08);
-    --shadow-lg: 0 20px 60px rgba(10,26,58,0.12);
-    --shadow-coral: 0 10px 30px rgba(255,77,109,0.25);
-    --shadow-royal: 0 10px 30px rgba(37,99,235,0.25);
+    --navy: #0f2040; --navy-mid: #1a3560; --blue: #2563eb; --blue-light: #3b82f6;
+    --sky: #dbeafe; --sky-pale: #eff6ff; --gold: #f59e0b; --white: #ffffff;
+    --off-white: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+    --gray-400: #94a3b8; --gray-600: #475569; --gray-800: #1e293b;
+    --serif: 'Playfair Display', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 12px; --shadow: 0 4px 24px rgba(15,32,64,0.10); --shadow-lg: 0 12px 48px rgba(15,32,64,0.16);
   }
-
   html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body { font-family: var(--sans); color: var(--gray-800); background: var(--white); line-height: 1.6; }
 
-  .topbar { background: var(--ink); color: var(--white); text-align: center; padding: 9px 24px; font-size: 0.78rem; letter-spacing: 0.05em; font-weight: 500; }
-
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 14px 5%; display: flex; align-items: center; justify-content: space-between; }
-  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .nav-logo-mark { width: 40px; height: 40px; background: var(--royal); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-royal); transition: transform 0.3s ease; }
-  .nav-logo:hover .nav-logo-mark { transform: rotate(-12deg); }
-  .nav-logo-mark svg { width: 22px; height: 22px; fill: var(--white); }
-  .nav-logo-text { font-family: var(--display); font-size: 1.15rem; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; }
-  .nav-logo-text span { color: var(--coral); }
-  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: 0.9rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; transition: all 0.2s; }
-  .nav-links a:hover { background: var(--royal-pale); color: var(--royal); }
-  .nav-cta { background: var(--coral) !important; color: var(--white) !important; padding: 10px 20px !important; border-radius: 100px !important; box-shadow: var(--shadow-coral); transition: all 0.25s !important; display: inline-flex !important; align-items: center; gap: 6px; }
-  .nav-cta:hover { background: var(--coral-soft) !important; transform: translateY(-1px); }
-  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; gap: 4px; }
-  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
-
-  .hero { position: relative; padding: 80px 5% 100px; overflow: hidden; background: linear-gradient(180deg, var(--cloud) 0%, var(--white) 100%); }
-  .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none; }
-  .hero-orb.o1 { width: 420px; height: 420px; background: var(--royal); opacity: 0.16; top: -120px; right: -100px; }
-  .hero-orb.o2 { width: 340px; height: 340px; background: var(--coral); opacity: 0.18; bottom: -100px; left: -80px; }
-  .hero-orb.o3 { width: 180px; height: 180px; background: var(--sun); opacity: 0.30; top: 30%; left: 35%; }
-  .hero-shape { position: absolute; z-index: 1; pointer-events: none; }
-  .hero-shape.sq { width: 60px; height: 60px; background: var(--sun); border-radius: 14px; top: 18%; right: 32%; transform: rotate(15deg); box-shadow: 0 10px 30px rgba(255,214,10,0.3); animation: floatA 5s ease-in-out infinite; }
-  .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; max-width: 1300px; margin: 0 auto; }
-  .hero-text { animation: fadeUp 0.8s ease both; }
-  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--royal); font-size: 0.8rem; font-weight: 700; padding: 8px 16px; border-radius: 100px; margin-bottom: 24px; border: 1px solid var(--royal-pale); box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
-  .hero-tag-dot { width: 7px; height: 7px; background: var(--royal); border-radius: 50%; box-shadow: 0 0 0 4px rgba(37,99,235,0.2); animation: pulse 2s ease-in-out infinite; }
-  .hero-title { font-family: var(--display); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 0.98; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 22px; }
-  .hero-title em { font-style: italic; color: var(--coral); font-weight: 800; position: relative; display: inline-block; }
-  .hero-title em::after { content: ''; position: absolute; bottom: 6px; left: 0; right: 0; height: 14px; background: var(--sun); z-index: -1; opacity: 0.55; border-radius: 4px; transform: skewX(-6deg); }
-  .hero-sub { font-size: 1.1rem; color: var(--ink-soft); max-width: 480px; line-height: 1.65; margin-bottom: 36px; font-weight: 500; }
-  .hero-cta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .btn-primary { background: var(--coral); color: var(--white); padding: 16px 32px; border-radius: 100px; text-decoration: none; font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; border: none; cursor: pointer; font-family: var(--sans); box-shadow: var(--shadow-coral); }
-  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
-  .btn-ghost { color: var(--ink); padding: 16px 24px; text-decoration: none; font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: color 0.25s; }
-  .btn-ghost:hover { color: var(--royal); }
-  .hero-trust { margin-top: 48px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .hero-trust-text { font-size: 0.85rem; color: var(--ink-soft); font-weight: 500; }
-  .hero-trust-text b { color: var(--ink); font-weight: 800; }
-  .hero-trust-text .stars { color: var(--sun-deep); margin-right: 4px; }
-
-  .hero-visual { position: relative; aspect-ratio: 1; max-width: 520px; margin: 0 auto; animation: fadeIn 1s ease both 0.2s; }
-  .hero-vis-main { inset: 6% 6% 6% 6%; background: var(--royal); border-radius: 32px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: absolute; box-shadow: var(--shadow-lg); }
-  .hero-vis-main::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.3), transparent 60%); }
-  .hero-vis-main img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; }
-  .hero-vis-emoji { font-size: 9rem; position: relative; z-index: 2; animation: bounceY 3.5s ease-in-out infinite; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.25)); }
-  .hero-vis-stat { position: absolute; background: white; border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 12px; }
-  .hero-vis-stat.s1 { top: -10px; left: -10px; animation: floatA 5s ease-in-out infinite; }
-  .hero-vis-stat.s2 { bottom: 8%; right: -16px; animation: floatB 5s ease-in-out infinite 0.5s; }
-  .hero-vis-stat-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
-  .hero-vis-stat.s1 .hero-vis-stat-icon { background: var(--coral); }
-  .hero-vis-stat.s2 .hero-vis-stat-icon { background: var(--sun); }
-  .hero-vis-stat-num { font-family: var(--display); font-size: 1.5rem; font-weight: 900; color: var(--ink); line-height: 1; }
-  .hero-vis-stat-lbl { font-size: 0.72rem; color: var(--ink-mute); font-weight: 600; letter-spacing: 0.04em; margin-top: 2px; }
-
-  .offers-strip { background: var(--ink); color: var(--white); padding: 24px 5%; position: relative; overflow: hidden; }
-  .offers-strip-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
-  .offer-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 20px 22px; display: flex; align-items: center; gap: 16px; transition: all 0.25s; cursor: pointer; }
-  .offer-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); border-color: var(--sun); }
-  .offer-card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-  .offer-card-icon.o1 { background: var(--coral); }
-  .offer-card-icon.o2 { background: var(--sun); }
-  .offer-card-icon.o3 { background: var(--royal); }
-  .offer-card-text { flex: 1; }
-  .offer-card-title { font-family: var(--display); font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 3px; }
-  .offer-card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 500; }
-  .offer-card-badge { background: var(--sun); color: var(--ink); padding: 4px 10px; border-radius: 100px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
-
-  section { padding: 100px 5%; position: relative; }
-  .section-header { max-width: 720px; margin-bottom: 60px; }
-  .section-header.center { text-align: center; margin: 0 auto 60px; }
-  .section-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 800; color: var(--royal); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px; padding: 6px 14px; background: var(--royal-pale); border-radius: 100px; }
-  .section-title { font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900; line-height: 1.02; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 18px; }
-  .section-title em { font-style: italic; color: var(--coral); font-weight: 800; }
-  .section-sub { font-size: 1.05rem; color: var(--ink-soft); max-width: 560px; line-height: 1.65; font-weight: 500; }
-  .section-header.center .section-sub { margin: 0 auto; }
-
-  #sports { background: var(--cloud); }
-  .sports-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1300px; margin: 0 auto; }
-  .sport-card { background: white; border-radius: 24px; padding: 28px 24px; position: relative; overflow: hidden; cursor: pointer; transition: all 0.35s ease; border: 1px solid var(--line); }
-  .sport-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: 24px 24px 0 0; }
-  .sport-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-  .sport-card.royal::before { background: var(--royal); }
-  .sport-card.coral::before { background: var(--coral); }
-  .sport-card.sun::before { background: var(--sun); }
-  .sport-card.ink::before { background: var(--ink); }
-  .sport-card.royal-coral::before { background: linear-gradient(90deg, var(--royal), var(--coral)); }
-  .sport-card.coral-sun::before { background: linear-gradient(90deg, var(--coral), var(--sun)); }
-  .sport-card.sun-royal::before { background: linear-gradient(90deg, var(--sun), var(--royal)); }
-  .sport-card.ink-royal::before { background: linear-gradient(90deg, var(--ink), var(--royal)); }
-  .sport-emoji-wrap { width: 70px; height: 70px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; font-size: 2.4rem; overflow: hidden; }
-  .sport-emoji-wrap img { width: 100%; height: 100%; object-fit: cover; }
-  .sport-card.royal .sport-emoji-wrap, .sport-card.royal-coral .sport-emoji-wrap { background: var(--royal-pale); }
-  .sport-card.coral .sport-emoji-wrap, .sport-card.coral-sun .sport-emoji-wrap { background: #ffe4ea; }
-  .sport-card.sun .sport-emoji-wrap, .sport-card.sun-royal .sport-emoji-wrap { background: #fff8d1; }
-  .sport-card.ink .sport-emoji-wrap, .sport-card.ink-royal .sport-emoji-wrap { background: #e2e8f0; }
-  .sport-name { font-family: var(--display); font-size: 1.4rem; font-weight: 900; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.02em; }
-  .sport-meta { font-size: 0.85rem; color: var(--ink-soft); font-weight: 600; margin-bottom: 16px; }
-  .sport-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-  .sport-pill { font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; background: var(--cloud); color: var(--ink-soft); }
-  .sport-cta { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px dashed var(--line); }
-  .sport-price { font-family: var(--display); font-size: 1rem; font-weight: 800; color: var(--ink); }
-  .sport-price span { font-size: 0.75rem; font-weight: 600; color: var(--ink-mute); }
-  .sport-link { color: var(--royal); font-size: 0.85rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.25s; }
-  .sport-card:hover .sport-link { gap: 8px; }
-
-  #programs { background: var(--white); }
-  .programs-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1300px; margin: 0 auto; }
-  .programs-schedule { background: var(--cloud); border-radius: 28px; padding: 32px; position: relative; overflow: hidden; }
-  .schedule-week { display: flex; gap: 6px; margin-bottom: 24px; }
-  .schedule-day { flex: 1; text-align: center; padding: 12px 6px; border-radius: 12px; background: white; border: 1px solid var(--line); transition: all 0.2s; cursor: pointer; }
-  .schedule-day.active { background: var(--ink); border-color: var(--ink); }
-  .schedule-day.active .schedule-day-name { color: var(--white); }
-  .schedule-day.active .schedule-day-num { color: var(--sun); }
-  .schedule-day-name { font-size: 0.7rem; color: var(--ink-mute); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
-  .schedule-day-num { font-family: var(--display); font-size: 1.3rem; color: var(--ink); font-weight: 800; line-height: 1; }
-  .schedule-list { display: flex; flex-direction: column; gap: 12px; }
-  .schedule-row { display: grid; grid-template-columns: 70px 1fr auto; gap: 16px; align-items: center; background: white; border-radius: 14px; padding: 14px 18px; }
-  .schedule-time { font-family: var(--display); font-weight: 800; color: var(--royal); font-size: 0.9rem; }
-  .schedule-sport-name { font-family: var(--display); font-weight: 700; color: var(--ink); font-size: 1rem; letter-spacing: -0.01em; }
-  .schedule-sport-meta { font-size: 0.78rem; color: var(--ink-soft); font-weight: 500; margin-top: 2px; }
-  .schedule-age-tag { background: var(--royal-pale); color: var(--royal); padding: 4px 10px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; }
-  .programs-content .section-eyebrow { background: #ffe4ea; color: var(--coral); }
-
-  #coaches { background: var(--cloud); }
-  .coaches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; max-width: 1300px; margin: 0 auto; }
-  .coach-card { background: white; border-radius: 24px; overflow: hidden; transition: all 0.3s ease; }
-  .coach-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-  .coach-photo { aspect-ratio: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .coach-photo.bg1 { background: linear-gradient(135deg, var(--royal), #1d4ed8); }
-  .coach-photo.bg2 { background: linear-gradient(135deg, var(--coral), #d61f69); }
-  .coach-photo.bg3 { background: linear-gradient(135deg, var(--ink), #2d3a5f); }
-  .coach-photo.bg4 { background: linear-gradient(135deg, var(--sun-deep), var(--sun)); }
-  .coach-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .coach-monogram { font-family: var(--display); font-size: 4.5rem; color: rgba(255,255,255,0.95); font-weight: 900; font-style: italic; letter-spacing: -0.05em; }
-  .coach-sport-badge { position: absolute; top: 14px; right: 14px; background: white; border-radius: 100px; padding: 5px 12px; font-size: 0.7rem; font-weight: 800; color: var(--ink); }
-  .coach-cert { position: absolute; bottom: 14px; left: 14px; background: var(--sun); border-radius: 8px; padding: 5px 10px; font-size: 0.68rem; font-weight: 800; color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase; }
-  .coach-body { padding: 22px 22px 24px; }
-  .coach-name { font-family: var(--display); font-size: 1.2rem; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
-  .coach-title { font-size: 0.82rem; color: var(--royal); font-weight: 700; margin-bottom: 14px; }
-  .coach-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-  .coach-tag { font-size: 0.68rem; background: var(--cloud); color: var(--ink-soft); padding: 4px 10px; border-radius: 100px; font-weight: 700; }
-  .coach-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
-  .coach-stat-n { font-family: var(--display); font-size: 1.2rem; font-weight: 900; color: var(--coral); line-height: 1; }
-  .coach-stat-l { font-size: 0.7rem; color: var(--ink-mute); font-weight: 600; margin-top: 3px; }
-
-  #offers-section { background: var(--ink); color: white; position: relative; overflow: hidden; }
-  #offers-section::before { content: ''; position: absolute; width: 500px; height: 500px; background: var(--royal); opacity: 0.18; border-radius: 50%; filter: blur(120px); top: -150px; left: -100px; }
-  #offers-section::after { content: ''; position: absolute; width: 400px; height: 400px; background: var(--coral); opacity: 0.2; border-radius: 50%; filter: blur(100px); bottom: -150px; right: -50px; }
-  #offers-section .section-eyebrow { background: rgba(255,214,10,0.15); color: var(--sun); }
-  #offers-section .section-title { color: white; }
-  #offers-section .section-title em { color: var(--sun); }
-  #offers-section .section-sub { color: rgba(255,255,255,0.7); }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
-  .price-card { background: white; color: var(--ink); border-radius: 28px; padding: 36px 32px; position: relative; transition: all 0.3s ease; }
-  .price-card:hover { transform: translateY(-6px); }
-  .price-card.popular { background: linear-gradient(135deg, var(--royal) 0%, var(--royal-deep) 100%); color: white; transform: scale(1.04); box-shadow: 0 30px 80px rgba(37,99,235,0.4); }
-  .price-card-badge { position: absolute; top: -14px; right: 24px; background: var(--sun); color: var(--ink); padding: 6px 14px; border-radius: 100px; font-family: var(--display); font-size: 0.78rem; font-weight: 800; }
-  .price-card-name { font-family: var(--display); font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
-  .price-card-desc { font-size: 0.88rem; opacity: 0.7; margin-bottom: 28px; }
-  .price-amount-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-  .price-old { font-family: var(--display); font-size: 1.2rem; color: var(--ink-mute); text-decoration: line-through; font-weight: 600; }
-  .price-card.popular .price-old { color: rgba(255,255,255,0.5); }
-  .price-new { font-family: var(--display); font-size: 2.6rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
-  .price-period { font-size: 0.85rem; opacity: 0.6; font-weight: 600; margin-bottom: 24px; }
-  .price-save { display: inline-block; background: var(--coral); color: white; padding: 4px 12px; border-radius: 100px; font-size: 0.72rem; font-weight: 800; margin-bottom: 24px; }
-  .price-card.popular .price-save { background: var(--sun); color: var(--ink); }
-  .price-list { list-style: none; margin-bottom: 30px; }
-  .price-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.9rem; padding: 8px 0; font-weight: 500; }
-  .price-list li::before { content: '✓'; color: var(--coral); font-weight: 900; font-size: 1rem; flex-shrink: 0; }
-  .price-card.popular .price-list li::before { color: var(--sun); }
-  .price-cta { width: 100%; background: var(--ink); color: white; border: none; cursor: pointer; padding: 16px; border-radius: 100px; font-family: var(--sans); font-size: 0.92rem; font-weight: 700; transition: all 0.25s; }
-  .price-cta:hover { background: var(--coral); }
-  .price-card.popular .price-cta { background: var(--sun); color: var(--ink); }
-  .price-card.popular .price-cta:hover { background: white; }
-
-  #enroll { background: white; position: relative; }
-  .enroll-card { max-width: 1100px; margin: 0 auto; background: var(--cloud); border-radius: 32px; padding: 60px 56px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; position: relative; overflow: hidden; }
-  .enroll-card::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--coral); opacity: 0.18; border-radius: 50%; filter: blur(70px); top: -120px; right: -100px; }
-  .enroll-content { position: relative; z-index: 2; }
-  .enroll-content .section-title { font-size: 2.4rem; margin-bottom: 16px; }
-  .enroll-bullets { list-style: none; margin-top: 24px; }
-  .enroll-bullets li { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-weight: 500; color: var(--ink-soft); }
-  .enroll-form { position: relative; z-index: 2; background: white; border-radius: 24px; padding: 36px 34px; box-shadow: var(--shadow-lg); }
-  .enroll-form-title { font-family: var(--display); font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
-  .enroll-form-sub { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 22px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-  .form-label { font-size: 0.78rem; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
-  .form-input, .form-select { padding: 13px 16px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--cloud); font-family: var(--sans); font-size: 0.92rem; color: var(--ink); outline: none; width: 100%; }
-  .form-input:focus, .form-select:focus { border-color: var(--royal); background: white; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .form-submit-trial { width: 100%; background: var(--coral); color: white; border: none; cursor: pointer; padding: 15px; border-radius: 100px; font-family: var(--sans); font-size: 0.95rem; font-weight: 800; margin-top: 8px; transition: all 0.25s; box-shadow: var(--shadow-coral); }
-  .form-submit-trial:hover { background: var(--ink); }
-
-  #testimonials { background: var(--cloud); position: relative; overflow: hidden; }
-  .testimonials-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 24px; max-width: 1300px; margin: 0 auto; }
-  .testi-card { background: white; border-radius: 24px; padding: 32px 30px; position: relative; transition: all 0.3s ease; }
-  .testi-card.featured { background: var(--ink); color: white; grid-row: span 2; }
-  .testi-quote-mark { font-family: var(--display); font-size: 4rem; line-height: 0.5; color: var(--royal); margin-bottom: 18px; font-weight: 900; font-style: italic; }
-  .testi-card.featured .testi-quote-mark { color: var(--sun); }
-  .testi-stars { display: flex; gap: 2px; margin-bottom: 16px; }
-  .testi-stars span { color: var(--sun-deep); font-size: 1rem; }
-  .testi-card.featured .testi-stars span { color: var(--sun); }
-  .testi-text { font-family: var(--display); font-weight: 700; line-height: 1.35; margin-bottom: 20px; color: var(--ink); font-size: 1rem; }
-  .testi-card.featured .testi-text { color: white; font-size: 1.5rem; }
-  .testi-author { display: flex; align-items: center; gap: 14px; padding-top: 18px; border-top: 1px solid var(--line); }
-  .testi-card.featured .testi-author { border-top-color: rgba(255,255,255,0.12); }
-  .testi-avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; color: white; font-size: 1rem; }
-  .testi-name { font-weight: 800; font-size: 0.9rem; }
-  .testi-role { font-size: 0.78rem; opacity: 0.65; font-weight: 600; margin-top: 2px; }
-  .achievements-bar { max-width: 1300px; margin: 50px auto 0; background: white; border-radius: 24px; padding: 32px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .achievement { text-align: center; border-right: 1px solid var(--line); padding-right: 24px; }
-  .achievement:last-child { border-right: none; }
-  .achievement-num { font-family: var(--display); font-size: 2.4rem; font-weight: 900; color: var(--coral); line-height: 1; letter-spacing: -0.03em; }
-  .achievement-label { font-size: 0.82rem; color: var(--ink-soft); font-weight: 600; margin-top: 6px; }
-
-  #news { background: white; }
-  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1300px; margin: 0 auto; }
-  .news-card { background: var(--cloud); border-radius: 24px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; }
-  .news-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-  .news-image { aspect-ratio: 16/9; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .news-image.b1 { background: linear-gradient(135deg, var(--royal) 0%, #1d4ed8 100%); }
-  .news-image.b2 { background: linear-gradient(135deg, var(--coral) 0%, #d61f69 100%); }
-  .news-image.b3 { background: linear-gradient(135deg, var(--sun-deep) 0%, var(--sun) 100%); }
-  .news-image img { width: 100%; height: 100%; object-fit: cover; }
-  .news-image-emoji { font-size: 4rem; opacity: 0.85; }
-  .news-cat-badge { position: absolute; top: 16px; left: 16px; background: white; color: var(--ink); padding: 5px 12px; border-radius: 100px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
-  .news-body { padding: 24px 26px 26px; }
-  .news-date { font-size: 0.78rem; color: var(--ink-mute); font-weight: 600; margin-bottom: 8px; }
-  .news-title { font-family: var(--display); font-size: 1.2rem; font-weight: 800; color: var(--ink); line-height: 1.25; margin-bottom: 12px; }
-  .news-excerpt { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 16px; }
-
-  #contact { background: var(--cloud); }
-  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; max-width: 1300px; margin: 0 auto; }
-  .contact-block { background: white; border-radius: 28px; padding: 44px 40px; }
-  .contact-block.portal { background: var(--ink); color: white; position: relative; overflow: hidden; }
-  .contact-block.portal::before { content: ''; position: absolute; width: 280px; height: 280px; background: var(--royal); opacity: 0.3; border-radius: 50%; filter: blur(70px); top: -100px; right: -50px; }
-  .contact-block-h { font-family: var(--display); font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
-  .contact-block.portal .contact-block-h em { color: var(--sun); font-style: italic; }
-  .contact-block-sub { font-size: 0.95rem; opacity: 0.7; margin-bottom: 28px; line-height: 1.6; }
-  .contact-block:not(.portal) .contact-block-sub { color: var(--ink-soft); opacity: 1; }
-  .contact-items { display: flex; flex-direction: column; gap: 18px; margin-bottom: 28px; }
-  .contact-row { display: flex; gap: 14px; align-items: center; }
-  .contact-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--royal-pale); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-  .contact-block.portal .contact-icon { background: rgba(255,214,10,0.15); }
-  .contact-row-label { font-size: 0.75rem; color: var(--ink-mute); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
-  .contact-block.portal .contact-row-label { color: rgba(255,255,255,0.55); }
-  .contact-row-value { font-size: 0.95rem; font-weight: 600; }
-  .contact-whatsapp { background: #25d366; color: white; border-radius: 100px; padding: 14px 24px; text-decoration: none; font-weight: 700; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 10px; transition: all 0.25s; box-shadow: 0 8px 24px rgba(37,211,102,0.25); }
-  .contact-whatsapp:hover { background: #1aaf52; transform: translateY(-2px); }
-  .portal-features { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
-  .portal-feature { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; color: rgba(255,255,255,0.85); font-weight: 500; }
-  .portal-feature-check { width: 24px; height: 24px; background: var(--coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.7rem; flex-shrink: 0; font-weight: 800; }
-  .portal-login-btn { width: 100%; background: var(--sun); color: var(--ink); border: none; cursor: pointer; padding: 16px; border-radius: 100px; font-family: var(--sans); font-size: 0.95rem; font-weight: 800; text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.25s; position: relative; z-index: 2; margin-top: 8px; }
-  .portal-login-btn:hover { background: white; }
-
-  footer { background: var(--ink); color: white; padding: 80px 5% 36px; position: relative; overflow: hidden; }
-  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 56px; max-width: 1300px; margin: 0 auto; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .footer-brand-desc { font-size: 0.92rem; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 320px; margin-top: 14px; }
-  .footer-col-title { font-family: var(--display); font-size: 0.95rem; font-weight: 800; color: white; margin-bottom: 18px; }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
-  .footer-links a:hover { color: var(--sun); }
-  .footer-bottom { max-width: 1300px; margin: 28px auto 0; display: flex; justify-content: space-between; align-items: center; }
-  .footer-copy { font-size: 0.85rem; color: rgba(255,255,255,0.4); }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes floatA { 0%, 100% { transform: translateY(0) rotate(15deg); } 50% { transform: translateY(-14px) rotate(15deg); } }
-  @keyframes floatB { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-  @keyframes bounceY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
-  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 4px rgba(37,99,235,0.2); } 50% { box-shadow: 0 0 0 8px rgba(37,99,235,0.1); } }
-
-  .skeleton-msg { text-align: center; padding: 40px; color: var(--ink-mute); grid-column: 1/-1; }
-
-  @media (max-width: 1024px) {
-    .hero-inner, .programs-layout, .enroll-card, .contact-layout { grid-template-columns: 1fr; gap: 50px; }
-    .sports-grid, .coaches-grid { grid-template-columns: repeat(2, 1fr); }
-    .pricing-grid, .news-grid { grid-template-columns: repeat(2, 1fr); }
-    .price-card.popular { transform: scale(1); }
-    .testimonials-grid { grid-template-columns: 1fr 1fr; }
-    .testi-card.featured { grid-column: span 2; grid-row: span 1; }
-    .achievements-bar { grid-template-columns: repeat(2, 1fr); }
-    .achievement { border-right: none; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 68px;
   }
-  @media (max-width: 720px) {
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-mark {
+    width: 38px; height: 38px; background: var(--navy); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-mark svg { width: 22px; height: 22px; fill: var(--gold); }
+  .nav-logo-text { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--navy); }
+  .nav-links { display: flex; gap: 2px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--gray-600); font-size: 0.875rem; font-weight: 500;
+    padding: 6px 12px; border-radius: 8px; transition: background 0.18s, color 0.18s;
+  }
+  .nav-links a:hover { background: var(--sky-pale); color: var(--blue); }
+  .nav-cta { background: var(--navy); color: var(--white) !important; padding: 8px 18px !important; border-radius: 8px !important; }
+  .nav-cta:hover { background: var(--blue) !important; color: var(--white) !important; }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--gray-800); border-radius: 2px; }
+
+  #home {
+    padding-top: 68px; min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center; overflow: hidden;
+  }
+  .hero-left { padding: 80px 5% 80px 8%; animation: fadeUp 0.7s ease both; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sky); color: var(--blue); font-size: 0.78rem; font-weight: 500;
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 28px; letter-spacing: 0.04em;
+  }
+  .hero-tag span { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; display: inline-block; }
+  .hero-title { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; color: var(--navy); margin-bottom: 22px; }
+  .hero-title em { font-style: normal; color: var(--blue); }
+  .hero-sub { font-size: 1.05rem; color: var(--gray-600); max-width: 420px; line-height: 1.75; margin-bottom: 40px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--navy); color: var(--white); padding: 13px 28px; border-radius: var(--radius);
+    font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; font-family: var(--sans);
+  }
+  .btn-primary:hover { background: var(--blue); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--gray-200); color: var(--gray-800); padding: 13px 28px; border-radius: var(--radius);
+    font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+  .hero-stats { display: flex; gap: 36px; margin-top: 52px; padding-top: 36px; border-top: 1px solid var(--gray-200); }
+  .hero-stat-num { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--navy); display: block; }
+  .hero-stat-lbl { font-size: 0.8rem; color: var(--gray-400); font-weight: 500; }
+  .hero-right {
+    background: var(--navy); min-height: 100vh; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; animation: fadeIn 0.9s ease both 0.2s;
+  }
+  .hero-right-pattern {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 30% 40%, rgba(37,99,235,0.35) 0%, transparent 55%),
+                      radial-gradient(circle at 75% 70%, rgba(245,158,11,0.15) 0%, transparent 45%);
+  }
+  .hero-cards { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 16px; padding: 40px; }
+  .hero-card {
+    background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px; padding: 20px 24px; backdrop-filter: blur(8px); min-width: 280px;
+  }
+  .hero-card-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .hero-card-title { font-family: var(--serif); font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 6px; }
+  .hero-card-meta { font-size: 0.8rem; color: rgba(255,255,255,0.6); display: flex; gap: 14px; }
+  .hero-card-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); display: inline-block; margin-right: 6px; }
+
+  section { padding: 96px 8%; }
+  .section-label { font-size: 0.72rem; font-weight: 500; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+  .section-title { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--navy); line-height: 1.2; max-width: 560px; }
+  .section-sub { font-size: 1rem; color: var(--gray-600); max-width: 520px; margin-top: 14px; line-height: 1.75; }
+
+  #about { background: var(--off-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 60px; }
+  .about-features { display: flex; flex-direction: column; gap: 24px; }
+  .about-feature { display: flex; gap: 18px; align-items: flex-start; }
+  .about-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--sky); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .about-icon svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 2; }
+  .about-feat-title { font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .about-feat-text { font-size: 0.875rem; color: var(--gray-600); line-height: 1.7; }
+  .about-visual { background: var(--navy); border-radius: 20px; overflow: hidden; aspect-ratio: 4/3; position: relative; display: flex; align-items: center; justify-content: center; }
+  .about-visual-inner { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(37,99,235,0.5) 0%, transparent 60%); }
+  .about-visual-text { position: relative; z-index: 2; text-align: center; padding: 40px; }
+  .about-quote { font-family: var(--serif); font-size: 1.5rem; color: #fff; font-weight: 700; line-height: 1.4; }
+  .about-quote-sub { font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-top: 12px; }
+
+  #events { background: var(--white); }
+  .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .event-card { border: 1px solid var(--gray-200); border-radius: 16px; overflow: hidden; transition: box-shadow 0.22s, transform 0.22s; }
+  .event-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+  .event-card-top { background: var(--navy); padding: 24px; position: relative; overflow: hidden; }
+  .event-card-top-pattern { position: absolute; right: -20px; top: -20px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(245,158,11,0.25) 0%, transparent 70%); }
+  .event-date-badge { background: var(--gold); color: var(--navy); border-radius: 8px; padding: 6px 14px; font-size: 0.8rem; font-weight: 700; display: inline-block; margin-bottom: 14px; }
+  .event-card-title { font-family: var(--serif); font-size: 1.1rem; color: #fff; font-weight: 700; line-height: 1.3; }
+  .event-card-body { padding: 20px 24px; }
+  .event-card-desc { font-size: 0.875rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 18px; }
+  .event-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .event-meta-item { font-size: 0.78rem; color: var(--gray-400); display: flex; align-items: center; gap: 5px; }
+  .event-meta-item svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--gray-400); font-size: 0.9rem; grid-column: 1/-1; }
+
+  #members { background: var(--off-white); }
+  .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
+  .member-card { background: var(--white); border-radius: 16px; padding: 28px 20px; text-align: center; border: 1px solid var(--gray-200); transition: box-shadow 0.2s, transform 0.2s; }
+  .member-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+  .member-avatar { width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--white); }
+  .member-name { font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .member-role { font-size: 0.78rem; color: var(--blue); font-weight: 500; }
+
+  #news { background: var(--white); }
+  .news-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; margin-top: 56px; }
+  .news-featured { background: var(--navy); border-radius: 20px; padding: 40px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; min-height: 340px; }
+  .news-featured-pattern { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(37,99,235,0.5) 0%, transparent 55%); }
+  .news-featured-content { position: relative; z-index: 2; }
+  .news-tag { font-size: 0.72rem; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .news-featured-title { font-family: var(--serif); font-size: 1.6rem; color: #fff; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
+  .news-featured-date { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+  .news-list { display: flex; flex-direction: column; gap: 16px; }
+  .news-item { background: var(--off-white); border-radius: 14px; padding: 20px; border: 1px solid var(--gray-200); transition: border-color 0.2s; cursor: pointer; }
+  .news-item:hover { border-color: var(--blue); }
+  .news-item-tag { font-size: 0.7rem; font-weight: 600; color: var(--blue); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .news-item-title { font-weight: 500; color: var(--navy); font-size: 0.9rem; line-height: 1.4; margin-bottom: 8px; }
+  .news-item-date { font-size: 0.75rem; color: var(--gray-400); }
+
+  #gallery { background: var(--off-white); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+  .gallery-item { border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; position: relative; cursor: pointer; }
+  .gallery-item:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 340px; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-item-bg { position: absolute; inset: 0; }
+  .gallery-overlay { position: absolute; inset: 0; background: rgba(15,32,64,0.55); display: flex; align-items: flex-end; padding: 20px; opacity: 0; transition: opacity 0.25s; }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay-text { font-size: 0.85rem; color: #fff; font-weight: 500; }
+
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-top: 56px; }
+  .contact-info { display: flex; flex-direction: column; gap: 28px; }
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--sky); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; stroke-width: 2; }
+  .contact-item-title { font-weight: 500; color: var(--navy); margin-bottom: 3px; font-size: 0.9rem; }
+  .contact-item-val { font-size: 0.875rem; color: var(--gray-600); }
+  .contact-form { display: flex; flex-direction: column; gap: 18px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  .form-label { font-size: 0.82rem; font-weight: 500; color: var(--navy); }
+  .form-input, .form-textarea { padding: 11px 15px; border: 1.5px solid var(--gray-200); border-radius: 10px; font-family: var(--sans); font-size: 0.875rem; color: var(--gray-800); background: var(--off-white); transition: border-color 0.18s; outline: none; resize: none; }
+  .form-input:focus, .form-textarea:focus { border-color: var(--blue); background: var(--white); }
+  .form-textarea { height: 110px; }
+
+  #app-login { background: var(--navy); position: relative; overflow: hidden; }
+  .app-login-pattern { position: absolute; inset: 0; background: radial-gradient(ellipse at 10% 80%, rgba(37,99,235,0.4) 0%, transparent 50%), radial-gradient(ellipse at 85% 20%, rgba(245,158,11,0.2) 0%, transparent 50%); }
+  .app-login-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .app-login-text .section-label { color: var(--gold); }
+  .app-login-text .section-title { color: var(--white); max-width: 420px; }
+  .app-login-text .section-sub { color: rgba(255,255,255,0.6); }
+  .app-login-features { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .app-login-feat { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.75); font-size: 0.875rem; }
+  .app-login-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .login-card { background: var(--white); border-radius: 20px; padding: 40px 36px; box-shadow: var(--shadow-lg); }
+  .login-card-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .login-card-sub { font-size: 0.85rem; color: var(--gray-600); margin-bottom: 30px; }
+  .login-form { display: flex; flex-direction: column; gap: 16px; }
+  .login-divider { display: flex; align-items: center; gap: 12px; margin: 4px 0; }
+  .login-divider-line { flex: 1; height: 1px; background: var(--gray-200); }
+  .login-divider-text { font-size: 0.75rem; color: var(--gray-400); }
+
+  footer { background: var(--gray-800); padding: 56px 8% 32px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand-desc { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin-top: 14px; max-width: 260px; }
+  .footer-col-title { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { text-decoration: none; font-size: 0.85rem; color: rgba(255,255,255,0.45); transition: color 0.18s; }
+  .footer-links a:hover { color: rgba(255,255,255,0.9); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  .footer-app-link { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.18s; }
+  .footer-app-link:hover { color: var(--gold); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 900px) {
+    #home { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { min-height: 380px; }
+    .about-grid, .contact-grid, .app-login-content { grid-template-columns: 1fr; gap: 40px; }
+    .events-grid { grid-template-columns: 1fr 1fr; }
+    .members-grid { grid-template-columns: 1fr 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item:first-child { grid-column: span 1; grid-row: span 1; min-height: auto; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
-    section { padding: 70px 5%; }
-    .sports-grid, .coaches-grid, .pricing-grid, .news-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .testi-card.featured { grid-column: span 1; }
-    .enroll-card { padding: 36px 24px; }
+    section { padding: 64px 5%; }
+    .hero-left { padding: 60px 5%; }
     .form-row { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
   }
+  @media (max-width: 540px) {
+    .events-grid, .members-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+
+  /* Loading skeleton */
+  .skeleton { background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 8px; }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 </style>
 </head>
 <body>
 
-<div class="topbar" id="topbar">Loading…</div>
-
 <nav>
   <a href="#home" class="nav-logo">
     <div class="nav-logo-mark">
-      <svg viewBox="0 0 24 24"><path d="M12 1l2.5 7h7.5l-6 4.5 2.5 7.5-6.5-4.5-6.5 4.5 2.5-7.5-6-4.5h7.5z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 2C9.38 2 7.25 4.13 7.25 6.75c0 2.57 2.01 4.65 4.63 4.74C11.96 11.5 12.04 11.5 12 11.49c.04.01-.04.01 0 .01 2.62-.09 4.63-2.17 4.63-4.74C16.75 4.13 14.62 2 12 2zm7.49 14.25c-.28-1.28-1.64-2.37-3.48-2.98C14.99 13.09 13.53 13.5 12 13.5s-2.99-.41-3.01-.23c-1.84.61-3.2 1.7-3.48 2.98C5.18 17.5 5 18.5 5 19.5c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5 0-1-.18-2-.51-3.25z"/></svg>
     </div>
-    <span class="nav-logo-text" id="nav-name">Champions<span>.</span></span>
+    <span class="nav-logo-text" id="nav-club-name">The Social Club</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#sports">Sports</a></li>
-    <li><a href="#programs">Schedule</a></li>
-    <li><a href="#coaches">Coaches</a></li>
-    <li><a href="#offers-section">Offers</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#members">Members</a></li>
     <li><a href="#news">News</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#enroll" class="nav-cta">⚡ Book Free Trial</a></li>
+    <li><a href="#app-login" class="nav-cta">Member Login</a></li>
   </ul>
-  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<section class="hero" id="home">
-  <div class="hero-orb o1"></div>
-  <div class="hero-orb o2"></div>
-  <div class="hero-orb o3"></div>
-  <div class="hero-shape sq"></div>
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-tag"><span class="hero-tag-dot"></span><span id="hero-tag-text">Loading…</span></div>
-      <h1 class="hero-title"><span id="hero-t1">Loading</span><br><em id="hero-t2">…</em>.</h1>
-      <p class="hero-sub" id="hero-sub">Loading…</p>
-      <div class="hero-cta">
-        <a href="#enroll" class="btn-primary">Book a Free Trial →</a>
-        <a href="#sports" class="btn-ghost">Explore Sports</a>
-      </div>
-      <div class="hero-trust">
-        <div class="hero-trust-text">
-          <span class="stars">★★★★★</span><b id="hero-trust">Loading…</b>
-        </div>
-      </div>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-tag"><span></span>Welcome to our community</div>
+    <h1 class="hero-title" id="hero-title">Where <em>connections</em><br>come to life</h1>
+    <p class="hero-sub" id="hero-sub">A vibrant community bringing people together through shared interests, unforgettable events, and genuine friendships.</p>
+    <div class="hero-actions">
+      <a href="#about" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Discover more
+      </a>
+      <a href="#app-login" class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Member login
+      </a>
     </div>
-    <div class="hero-visual">
-      <div class="hero-vis-main"><div class="hero-vis-emoji" id="hero-vis-emoji">⚽</div></div>
-      <div class="hero-vis-stat s1">
-        <div class="hero-vis-stat-icon">🏆</div>
-        <div><div class="hero-vis-stat-num" id="stat1-n">8</div><div class="hero-vis-stat-lbl" id="stat1-l">Sports</div></div>
-      </div>
-      <div class="hero-vis-stat s2">
-        <div class="hero-vis-stat-icon">👥</div>
-        <div><div class="hero-vis-stat-num" id="stat2-n">24</div><div class="hero-vis-stat-lbl" id="stat2-l">Coaches</div></div>
-      </div>
+    <div class="hero-stats">
+      <div><span class="hero-stat-num" id="stat-members">420+</span><span class="hero-stat-lbl">Active members</span></div>
+      <div><span class="hero-stat-num" id="stat-events">60+</span><span class="hero-stat-lbl">Events per year</span></div>
+      <div><span class="hero-stat-num" id="stat-years">12</span><span class="hero-stat-lbl">Years running</span></div>
     </div>
   </div>
-</section>
-
-<div class="offers-strip"><div class="offers-strip-inner" id="offers-strip"><div class="skeleton-msg">Loading offers…</div></div></div>
-
-<section id="sports">
-  <div class="section-header center">
-    <div class="section-eyebrow" id="sports-eyebrow">⚽ What we coach</div>
-    <h2 class="section-title"><span id="sports-title-1">8 sports,</span> <em id="sports-title-2">endless growth</em></h2>
-    <p class="section-sub" id="sports-sub">From your child's first ever lesson to competitive tournament training.</p>
-  </div>
-  <div class="sports-grid" id="sports-grid"><div class="skeleton-msg">Loading sports…</div></div>
-</section>
-
-<section id="programs">
-  <div class="programs-layout">
-    <div class="programs-schedule">
-      <div class="schedule-week" id="schedule-week"></div>
-      <div class="schedule-list" id="schedule-list"><div class="skeleton-msg">Loading schedule…</div></div>
-    </div>
-    <div class="programs-content">
-      <div class="section-eyebrow">📅 Programs &amp; schedule</div>
-      <h2 class="section-title">A program for <em>every age &amp; level</em></h2>
-      <p class="section-sub">From learn-to-play groups for little ones to high-performance competitive squads — we meet your child where they are.</p>
+  <div class="hero-right">
+    <div class="hero-right-pattern"></div>
+    <div class="hero-cards" id="hero-event-cards">
+      <div class="hero-card">
+        <div class="hero-card-label">Loading events…</div>
+        <div class="hero-card-title skeleton" style="height:20px; width:80%;"></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="coaches">
-  <div class="section-header center">
-    <div class="section-eyebrow">👨‍🏫 Our coaches</div>
-    <h2 class="section-title">Certified, <em>passionate</em>, &amp; here for your kids</h2>
-    <p class="section-sub">Every coach is licensed, background-checked, and shares one belief — kids learn fastest when they're having fun.</p>
-  </div>
-  <div class="coaches-grid" id="coaches-grid"><div class="skeleton-msg">Loading coaches…</div></div>
-</section>
-
-<section id="offers-section">
-  <div class="section-header center">
-    <div class="section-eyebrow">💰 Pricing &amp; offers</div>
-    <h2 class="section-title">Simple plans, <em>big savings</em></h2>
-    <p class="section-sub">Pick a single sport or unlock all 8 with our Multi-Sport Pass.</p>
-  </div>
-  <div class="pricing-grid" id="pricing-grid"><div class="skeleton-msg" style="color:rgba(255,255,255,0.6);">Loading plans…</div></div>
-</section>
-
-<section id="enroll">
-  <div class="enroll-card">
-    <div class="enroll-content">
-      <div class="section-eyebrow">⚡ Free trial</div>
-      <h2 class="section-title">Try us out — <em>on the house</em></h2>
-      <p class="section-sub">One free trial session in any sport. No payment, no commitment.</p>
-      <ul class="enroll-bullets">
-        <li>✓ 60-minute trial session</li>
-        <li>✓ Meet your child's coach in person</li>
-        <li>✓ Free skill assessment included</li>
-        <li>✓ Honest enrollment advice — no pressure</li>
-      </ul>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About us</div>
+  <h2 class="section-title">More than a club — a community</h2>
+  <p class="section-sub">We've been creating meaningful connections for years. Our club is built around the belief that the best experiences are shared ones.</p>
+  <div class="about-grid">
+    <div class="about-features">
+      <div class="about-feature">
+        <div class="about-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div><div class="about-feat-title">Inclusive community</div><div class="about-feat-text">Open to everyone. We celebrate diversity and welcome people from all backgrounds, interests, and walks of life.</div></div>
+      </div>
+      <div class="about-feature">
+        <div class="about-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div><div class="about-feat-title">Year-round events</div><div class="about-feat-text">From casual meetups to grand galas — our calendar is packed with events designed to spark joy and connection.</div></div>
+      </div>
+      <div class="about-feature">
+        <div class="about-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.93-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16a2 2 0 0 1 .28.92z"/></svg></div>
+        <div><div class="about-feat-title">Dedicated support</div><div class="about-feat-text">Our team and the Club Support App ensure every member gets the help and information they need, when they need it.</div></div>
+      </div>
+      <div class="about-feature">
+        <div class="about-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div><div class="about-feat-title">Member recognition</div><div class="about-feat-text">We celebrate our members' achievements and contributions through awards, spotlights, and special perks.</div></div>
+      </div>
     </div>
-    <form class="enroll-form" id="trial-form">
-      <div class="enroll-form-title">Book your free trial</div>
-      <div class="enroll-form-sub">We'll confirm within 2 hours on WhatsApp.</div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Parent's name</label><input class="form-input" type="text" required></div>
-        <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" required></div>
+    <div class="about-visual">
+      <div class="about-visual-inner"></div>
+      <div class="about-visual-text">
+        <div class="about-quote" id="about-quote">"Where every member feels at home from day one."</div>
+        <div class="about-quote-sub" id="about-quote-author">— Club Chairman</div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Child's name</label><input class="form-input" type="text" required></div>
-        <div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" min="5" max="18" required></div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Choose sport</label>
-        <select class="form-select" id="trial-sport"></select>
-      </div>
-      <button type="submit" class="form-submit-trial">Book my free trial →</button>
-    </form>
+    </div>
   </div>
 </section>
 
-<section id="testimonials">
-  <div class="section-header center">
-    <div class="section-eyebrow">💬 What parents say</div>
-    <h2 class="section-title">Real reviews from <em>real families</em></h2>
+<!-- EVENTS -->
+<section id="events">
+  <div class="section-label">Events</div>
+  <h2 class="section-title">What's coming up</h2>
+  <p class="section-sub">Stay connected with our community through regular events, workshops, and social gatherings.</p>
+  <div class="events-grid" id="events-grid">
+    <div class="empty-state">Loading events…</div>
   </div>
-  <div class="testimonials-grid" id="testimonials-grid"><div class="skeleton-msg">Loading reviews…</div></div>
-  <div class="achievements-bar" id="achievements-bar"></div>
 </section>
 
+<!-- MEMBERS -->
+<section id="members">
+  <div class="section-label">Our people</div>
+  <h2 class="section-title">The team behind the club</h2>
+  <p class="section-sub">Meet the dedicated committee members who keep the club running and growing every day.</p>
+  <div class="members-grid" id="members-grid">
+    <div class="empty-state">Loading members…</div>
+  </div>
+</section>
+
+<!-- NEWS -->
 <section id="news">
-  <div class="section-header center">
-    <div class="section-eyebrow">📰 Latest news</div>
-    <h2 class="section-title">Academy <em>updates &amp; wins</em></h2>
+  <div class="section-label">Latest news</div>
+  <h2 class="section-title">Stay in the loop</h2>
+  <p class="section-sub">Updates, announcements, and stories from within our community.</p>
+  <div class="news-grid" id="news-grid">
+    <div class="news-featured">
+      <div class="news-featured-pattern"></div>
+      <div class="news-featured-content">
+        <div class="news-tag">Loading…</div>
+        <div class="news-featured-title skeleton" style="height:28px; width:80%; margin-bottom:8px;"></div>
+      </div>
+    </div>
+    <div class="news-list" id="news-list"></div>
   </div>
-  <div class="news-grid" id="news-grid"><div class="skeleton-msg">Loading news…</div></div>
 </section>
 
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label">Gallery</div>
+  <h2 class="section-title">Moments from our community</h2>
+  <p class="section-sub">A glimpse into the events, friendships, and memories we've built together.</p>
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="empty-state" style="grid-column:1/-1;">Loading gallery…</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact">
-  <div class="section-header center">
-    <div class="section-eyebrow">📞 Get in touch</div>
-    <h2 class="section-title">Talk to us, or <em>jump into the portal</em></h2>
-  </div>
-  <div class="contact-layout">
-    <div class="contact-block">
-      <div class="contact-block-h">Visit us or say hi</div>
-      <div class="contact-block-sub">We're open 7 days a week. Drop in for a tour anytime.</div>
-      <div class="contact-items">
-        <div class="contact-row">
-          <div class="contact-icon">📍</div>
-          <div><div class="contact-row-label">Our location</div><div class="contact-row-value" id="c-addr">—</div></div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">📞</div>
-          <div><div class="contact-row-label">Call us</div><div class="contact-row-value" id="c-phone">—</div></div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">📧</div>
-          <div><div class="contact-row-label">Email</div><div class="contact-row-value" id="c-email">—</div></div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">🕐</div>
-          <div><div class="contact-row-label">Open hours</div><div class="contact-row-value" id="c-hours">—</div></div>
-        </div>
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Get in touch with us</h2>
+  <p class="section-sub">Have a question, suggestion, or want to learn more about membership? We'd love to hear from you.</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="contact-item-title">Our location</div><div class="contact-item-val" id="contact-address">Al Olaya District, Riyadh, Saudi Arabia</div></div>
       </div>
-      <a href="#" id="c-wa" class="contact-whatsapp">💬 Chat with us on WhatsApp</a>
+      <div class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="contact-item-title">Email us</div><div class="contact-item-val" id="contact-email">hello@thesocialclub.com</div></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.93-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16a2 2 0 0 1 .28.92z"/></svg></div>
+        <div><div class="contact-item-title">Call us</div><div class="contact-item-val" id="contact-phone">+966 11 000 0000</div></div>
+      </div>
     </div>
-    <div class="contact-block portal">
-      <div class="contact-block-h">Parent &amp; Student <em>Portal</em></div>
-      <div class="contact-block-sub">Existing families: log into the Champions Support App to view your schedule, attendance, fees, and coach updates.</div>
-      <div class="portal-features">
-        <div class="portal-feature"><div class="portal-feature-check">✓</div>View weekly training schedule</div>
-        <div class="portal-feature"><div class="portal-feature-check">✓</div>Track attendance &amp; progress</div>
-        <div class="portal-feature"><div class="portal-feature-check">✓</div>Pay fees online securely</div>
-        <div class="portal-feature"><div class="portal-feature-check">✓</div>Read your coach's session notes</div>
-        <div class="portal-feature"><div class="portal-feature-check">✓</div>Sign up for tournaments &amp; camps</div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input class="form-input" type="text" placeholder="Ahmed"></div>
+        <div class="form-group"><label class="form-label">Last name</label><input class="form-input" type="text" placeholder="Al-Rashid"></div>
       </div>
-      <a href="#" id="c-app" class="portal-login-btn">🔐 Login to Champions App</a>
+      <div class="form-group"><label class="form-label">Email address</label><input class="form-input" type="email" placeholder="you@example.com"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell us how we can help..."></textarea></div>
+      <button class="btn-primary" style="align-self:flex-start;">
+        Send message
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
     </div>
   </div>
 </section>
 
+<!-- APP LOGIN -->
+<section id="app-login">
+  <div class="app-login-pattern"></div>
+  <div class="app-login-content">
+    <div class="app-login-text">
+      <div class="section-label">Member portal</div>
+      <h2 class="section-title">Access the Club Support App</h2>
+      <p class="section-sub">Your hub for membership management, event booking, announcements, and everything the club has to offer.</p>
+      <div class="app-login-features">
+        <div class="app-login-feat"><div class="app-login-feat-dot"></div>Manage your membership profile</div>
+        <div class="app-login-feat"><div class="app-login-feat-dot"></div>Browse and register for events</div>
+        <div class="app-login-feat"><div class="app-login-feat-dot"></div>View announcements &amp; club news</div>
+        <div class="app-login-feat"><div class="app-login-feat-dot"></div>Connect with fellow members</div>
+        <div class="app-login-feat"><div class="app-login-feat-dot"></div>Track your membership benefits</div>
+      </div>
+    </div>
+    <div class="login-card">
+      <div class="login-card-title">Welcome back</div>
+      <div class="login-card-sub">Sign in to your Club Support App account</div>
+      <div class="login-form">
+        <div class="form-group"><label class="form-label">Email address</label><input class="form-input" type="email" placeholder="you@example.com"></div>
+        <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" placeholder="••••••••"></div>
+        <button class="btn-primary" style="width:100%; justify-content:center; font-size:0.95rem;">Sign in to the app</button>
+        <div class="login-divider"><div class="login-divider-line"></div><span class="login-divider-text">or</span><div class="login-divider-line"></div></div>
+        <a href="#contact" class="btn-outline" style="justify-content:center; font-size:0.875rem;">Request membership</a>
+        <div style="text-align:center; font-size:0.78rem; color:var(--gray-400); margin-top:4px;"><a href="#" style="color:var(--blue); text-decoration:none;">Forgot your password?</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div>
-      <a href="#home" class="nav-logo">
-        <div class="nav-logo-mark"><svg viewBox="0 0 24 24"><path fill="white" d="M12 1l2.5 7h7.5l-6 4.5 2.5 7.5-6.5-4.5-6.5 4.5 2.5-7.5-6-4.5h7.5z"/></svg></div>
-        <span class="nav-logo-text" style="color:white;" id="footer-name">Champions<span>.</span></span>
+      <a href="#home" class="nav-logo" style="margin-bottom:0;">
+        <div class="nav-logo-mark" style="background:rgba(255,255,255,0.1);">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C9.38 2 7.25 4.13 7.25 6.75c0 2.57 2.01 4.65 4.63 4.74C11.96 11.5 12.04 11.5 12 11.49c.04.01-.04.01 0 .01 2.62-.09 4.63-2.17 4.63-4.74C16.75 4.13 14.62 2 12 2zm7.49 14.25c-.28-1.28-1.64-2.37-3.48-2.98C14.99 13.09 13.53 13.5 12 13.5s-2.99-.41-3.01-.23c-1.84.61-3.2 1.7-3.48 2.98C5.18 17.5 5 18.5 5 19.5c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5 0-1-.18-2-.51-3.25z"/></svg>
+        </div>
+        <span class="nav-logo-text" style="color:white;" id="footer-club-name">The Social Club</span>
       </a>
-      <p class="footer-brand-desc">Building young champions, one session at a time. 8 sports. 24 certified coaches. One academy that actually cares.</p>
+      <p class="footer-brand-desc">A community built on connection, shared experiences, and making every member feel at home.</p>
     </div>
     <div>
-      <div class="footer-col-title">Sports</div>
-      <ul class="footer-links" id="footer-sports"></ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Academy</div>
+      <div class="footer-col-title">Navigation</div>
       <ul class="footer-links">
-        <li><a href="#coaches">Our coaches</a></li>
-        <li><a href="#programs">Schedule</a></li>
-        <li><a href="#offers-section">Pricing &amp; offers</a></li>
-        <li><a href="#testimonials">Parent reviews</a></li>
-        <li><a href="#news">News &amp; results</a></li>
+        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li><li><a href="#gallery">Gallery</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">For families</div>
+      <div class="footer-col-title">Community</div>
       <ul class="footer-links">
-        <li><a href="#enroll">Book free trial</a></li>
-        <li><a href="#contact">Contact &amp; WhatsApp</a></li>
-        <li><a href="#contact">Parent portal login</a></li>
+        <li><a href="#members">Our team</a></li><li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li><li><a href="#app-login">Member login</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="#" id="footer-address">Riyadh, Saudi Arabia</a></li>
+        <li><a href="#" id="footer-email">hello@thesocialclub.com</a></li>
+        <li><a href="#" id="footer-phone">+966 11 000 0000</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© <span id="yr"></span> Champions Academy · All rights reserved</span>
-    <span class="footer-copy">Built with ❤️ for young athletes</span>
+    <span class="footer-copy">© <span id="footer-year"></span> <span id="footer-club-name2">The Social Club</span>. All rights reserved.</span>
+    <a href="#app-login" class="footer-app-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Club Support App
+    </a>
   </div>
 </footer>
 
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-if (window.netlifyIdentity) {
-  window.netlifyIdentity.on("init", user => {
-    if (!user) {
-      window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
-    }
-  });
-}
-
-const COLORS = { royal: '#2563eb', coral: '#ff4d6d', sun: '#ffd60a', ink: '#0a1a3a' };
-
+// ── Markdown front-matter parser ──────────────────────────────────────────────
 function parseFrontMatter(text) {
   const match = text.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return {};
   const obj = {};
-  let curKey = null;
-  let inList = false;
   match[1].split('\n').forEach(line => {
-    if (inList && line.match(/^\s*-\s/)) {
-      let val = line.replace(/^\s*-\s/, '').trim().replace(/^["']|["']$/g, '');
-      if (!Array.isArray(obj[curKey])) obj[curKey] = [];
-      obj[curKey].push(val);
-      return;
-    }
-    inList = false;
     const idx = line.indexOf(':');
     if (idx === -1) return;
     const key = line.slice(0, idx).trim();
     let val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
-    curKey = key;
-    if (val === '') { inList = true; obj[key] = []; return; }
     if (val === 'true') val = true;
     else if (val === 'false') val = false;
     else if (!isNaN(val) && val !== '') val = Number(val);
@@ -610,222 +505,200 @@ function parseFrontMatter(text) {
   return obj;
 }
 
-async function fetchJSON(p) { try { const r = await fetch(p); return r.ok ? r.json() : null; } catch { return null; } }
-async function fetchMD(p) { try { const r = await fetch(p); return r.ok ? parseFrontMatter(await r.text()) : null; } catch { return null; } }
-async function loadFolder(folder, files) {
-  const results = [];
-  for (const f of files) {
-    const d = await fetchMD(`/content/${folder}/${f}`);
-    if (d && d.published !== false) results.push(d);
-  }
-  return results.sort((a, b) => (a.order || 99) - (b.order || 99));
+// ── Fetch helpers ─────────────────────────────────────────────────────────────
+async function fetchJSON(path) {
+  try { const r = await fetch(path); return r.ok ? r.json() : null; } catch { return null; }
+}
+async function fetchMD(path) {
+  try { const r = await fetch(path); return r.ok ? parseFrontMatter(await r.text()) : null; } catch { return null; }
 }
 
+// ── Avatar colors ─────────────────────────────────────────────────────────────
+const COLORS = {
+  navy:'#0f2040', blue:'#2563eb', teal:'#0f766e', purple:'#7c3aed',
+  red:'#be123c', amber:'#b45309', sky:'#0284c7', green:'#4d7c0f'
+};
+
+// ── Date formatting ───────────────────────────────────────────────────────────
 function fmtDate(iso) {
   if (!iso) return '';
   const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+}
+function fmtDateShort(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { day:'numeric', month:'short' });
 }
 
+// ── Scroll reveal ─────────────────────────────────────────────────────────────
+function revealObserve(el) {
+  el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  new IntersectionObserver(([e], obs) => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; obs.disconnect(); }
+  }, { threshold: 0.1 }).observe(el);
+}
+
+// ── Fetch content index (Netlify builds a /_redirects-free static dir) ────────
+// We use a known file list approach: list files declared in the repo
+// In real Netlify deploys the content files are served statically
+async function loadContent(folder, files) {
+  const results = [];
+  for (const f of files) {
+    const data = await fetchMD(`/content/${folder}/${f}`);
+    if (data && data.published !== false) results.push(data);
+  }
+  return results;
+}
+
+// ── Main data loader ──────────────────────────────────────────────────────────
 async function init() {
+  // Settings
   const s = await fetchJSON('/content/settings/general.json');
   if (s) {
-    document.getElementById('topbar').textContent = s.topbar || '';
-    document.getElementById('hero-tag-text').textContent = s.hero_tag || '';
-    document.getElementById('hero-t1').textContent = s.hero_title_1 || '';
-    document.getElementById('hero-t2').textContent = s.hero_title_2 || '';
-    document.getElementById('hero-sub').textContent = s.hero_sub || '';
-    document.getElementById('hero-trust').textContent = s.trust_rating || '';
-    document.getElementById('stat1-n').textContent = s.stat1_num;
-    document.getElementById('stat1-l').textContent = s.stat1_lbl;
-    document.getElementById('stat2-n').textContent = s.stat2_num;
-    document.getElementById('stat2-l').textContent = s.stat2_lbl;
-    if (s.hero_image) {
-      document.getElementById('hero-vis-emoji').outerHTML = `<img src="${s.hero_image}" alt="Hero" />`;
-    }
-    if (s.academy_name) {
-      document.title = s.academy_name + ' — Where kids find their champion within';
-    }
+    document.querySelectorAll('#nav-club-name, #footer-club-name, #footer-club-name2').forEach(el => el.textContent = s.club_name);
+    document.title = s.club_name;
+    if (s.hero_sub) document.getElementById('hero-sub').textContent = s.hero_sub;
+    if (s.stat_members) document.getElementById('stat-members').textContent = s.stat_members;
+    if (s.stat_events) document.getElementById('stat-events').textContent = s.stat_events;
+    if (s.stat_years) document.getElementById('stat-years').textContent = s.stat_years;
+    if (s.about_quote) document.getElementById('about-quote').textContent = `"${s.about_quote}"`;
+    if (s.about_quote_author) document.getElementById('about-quote-author').textContent = `— ${s.about_quote_author}`;
+    if (s.email) { document.getElementById('contact-email').textContent = s.email; document.getElementById('footer-email').textContent = s.email; }
+    if (s.phone) { document.getElementById('contact-phone').textContent = s.phone; document.getElementById('footer-phone').textContent = s.phone; }
+    if (s.address) { document.getElementById('contact-address').textContent = s.address; document.getElementById('footer-address').textContent = s.address.split(',').slice(-2).join(',').trim(); }
   }
 
-  const c = await fetchJSON('/content/settings/contact.json');
-  if (c) {
-    document.getElementById('c-addr').textContent = c.address || '';
-    document.getElementById('c-phone').textContent = c.phone || '';
-    document.getElementById('c-email').textContent = c.email || '';
-    document.getElementById('c-hours').textContent = c.hours || '';
-    document.getElementById('c-wa').href = `https://wa.me/${c.whatsapp || ''}`;
-    document.getElementById('c-app').href = c.app_url || '#';
-  }
+  // Events — fetch known files
+  const eventFiles = ['summer-gala-2026.md','photography-walk-2026.md','family-picnic-2026.md'];
+  const events = (await loadContent('events', eventFiles))
+    .filter(e => e.title)
+    .sort((a,b) => new Date(a.date) - new Date(b.date));
 
-  const ach = await fetchJSON('/content/settings/achievements.json');
-  if (ach && ach.items) {
-    document.getElementById('achievements-bar').innerHTML = ach.items.map(i =>
-      `<div class="achievement"><div class="achievement-num">${i.num}</div><div class="achievement-label">${i.lbl}</div></div>`
-    ).join('');
-  }
-
-  const sportFiles = ['football.md','tennis.md','badminton.md','swimming.md','cricket.md','basketball.md','table-tennis.md','karate.md'];
-  const sports = await loadFolder('sports', sportFiles);
-  const sg = document.getElementById('sports-grid');
-  if (sports.length) {
-    sg.innerHTML = sports.map(sp => `
-      <div class="sport-card ${sp.color}">
-        <div class="sport-emoji-wrap">${sp.image ? `<img src="${sp.image}" alt="${sp.name}">` : sp.emoji}</div>
-        <div class="sport-name">${sp.name}</div>
-        <div class="sport-meta">${sp.ages} · ${sp.level}</div>
-        <div class="sport-pills">${(sp.tags || []).map(t => `<span class="sport-pill">${t}</span>`).join('')}</div>
-        <div class="sport-cta">
-          <span class="sport-price">$${sp.price}<span>/mo</span></span>
-          <a href="#enroll" class="sport-link">Details →</a>
+  const evGrid = document.getElementById('events-grid');
+  if (events.length === 0) {
+    evGrid.innerHTML = '<div class="empty-state">No upcoming events at the moment. Check back soon!</div>';
+  } else {
+    evGrid.innerHTML = events.map(e => `
+      <div class="event-card">
+        <div class="event-card-top">
+          <div class="event-card-top-pattern"></div>
+          <div class="event-date-badge">${fmtDateShort(e.date)}</div>
+          <div class="event-card-title">${e.title}</div>
+        </div>
+        <div class="event-card-body">
+          <div class="event-card-desc">${e.description || ''}</div>
+          <div class="event-meta">
+            ${e.time ? `<span class="event-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${e.time}</span>` : ''}
+            ${e.location ? `<span class="event-meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${e.location}</span>` : ''}
+          </div>
         </div>
       </div>`).join('');
-    const ts = document.getElementById('trial-sport');
-    ts.innerHTML = sports.map(sp => `<option>${sp.emoji} ${sp.name}</option>`).join('') + '<option>Not sure — recommend one</option>';
-    document.getElementById('footer-sports').innerHTML = sports.slice(0, 4).map(sp => `<li><a href="#sports">${sp.name}</a></li>`).join('') + '<li><a href="#sports">View all sports</a></li>';
-  } else {
-    sg.innerHTML = '<div class="skeleton-msg">No sports yet — admin can add them in /admin</div>';
+    evGrid.querySelectorAll('.event-card').forEach(revealObserve);
   }
 
-  const offerFiles = ['free-trial.md','summer-camp.md','sibling.md'];
-  const offers = await loadFolder('offers', offerFiles);
-  const os = document.getElementById('offers-strip');
-  os.innerHTML = offers.length ? offers.map(o => `
-    <div class="offer-card">
-      <div class="offer-card-icon ${o.color}">${o.emoji}</div>
-      <div class="offer-card-text">
-        <div class="offer-card-title">${o.title}</div>
-        <div class="offer-card-sub">${o.subtitle}</div>
-      </div>
-      <span class="offer-card-badge">${o.badge}</span>
-    </div>`).join('') : '<div class="skeleton-msg" style="color:rgba(255,255,255,0.5);">No offers active</div>';
-
-  const coachFiles = ['faisal-al-khatib.md','layla-al-hassan.md','omar-jaber.md','sara-rahman.md'];
-  const coaches = await loadFolder('coaches', coachFiles);
-  const cg = document.getElementById('coaches-grid');
-  cg.innerHTML = coaches.length ? coaches.map(co => `
-    <div class="coach-card">
-      <div class="coach-photo ${co.bg}">
-        ${co.photo ? `<img src="${co.photo}" alt="${co.name}">` : `<div class="coach-monogram">${co.initials}</div>`}
-        <div class="coach-sport-badge">${co.sport_label}</div>
-        <div class="coach-cert">${co.certification}</div>
-      </div>
-      <div class="coach-body">
-        <div class="coach-name">${co.name}</div>
-        <div class="coach-title">${co.title}</div>
-        <div class="coach-tags">${(co.tags || []).map(t => `<span class="coach-tag">${t}</span>`).join('')}</div>
-        <div class="coach-stats">
-          <div><div class="coach-stat-n">${co.years}</div><div class="coach-stat-l">Yrs coaching</div></div>
-          <div><div class="coach-stat-n">${co.achievement_num}</div><div class="coach-stat-l">${co.achievement_lbl}</div></div>
+  // Hero event cards (first 3 upcoming events)
+  const heroCards = document.getElementById('hero-event-cards');
+  if (events.length > 0) {
+    heroCards.innerHTML = events.slice(0,3).map(e => `
+      <div class="hero-card">
+        <div class="hero-card-label">Upcoming event</div>
+        <div class="hero-card-title">${e.title}</div>
+        <div class="hero-card-meta">
+          <span><span class="hero-card-dot"></span>${fmtDate(e.date)}</span>
+          ${e.location ? `<span>${e.location}</span>` : ''}
         </div>
-      </div>
-    </div>`).join('') : '<div class="skeleton-msg">No coaches yet</div>';
+      </div>`).join('') + `
+      <div class="hero-card">
+        <div class="hero-card-label">Member app</div>
+        <div class="hero-card-title">Club Support App is live</div>
+        <div class="hero-card-meta"><span><span class="hero-card-dot"></span>Login below</span><span>All features ready</span></div>
+      </div>`;
+  }
 
-  const priceFiles = ['single-sport.md','multi-sport.md','family-plan.md'];
-  const plans = await loadFolder('pricing', priceFiles);
-  const pg = document.getElementById('pricing-grid');
-  pg.innerHTML = plans.length ? plans.map(p => `
-    <div class="price-card ${p.popular ? 'popular' : ''}">
-      ${p.popular ? `<span class="price-card-badge">${p.popular_badge || '⭐ Most popular'}</span>` : ''}
-      <div class="price-card-name">${p.name}</div>
-      <div class="price-card-desc">${p.desc}</div>
-      <div class="price-amount-row">
-        ${p.price_old ? `<span class="price-old">$${p.price_old}</span>` : ''}
-        <span class="price-new">$${p.price_new}</span>
-      </div>
-      <div class="price-period">${p.period}</div>
-      ${p.save_badge ? `<span class="price-save">${p.save_badge}</span>` : ''}
-      <ul class="price-list">${(p.features || []).map(f => `<li>${f}</li>`).join('')}</ul>
-      <button class="price-cta" onclick="document.getElementById('enroll').scrollIntoView({behavior:'smooth'})">${p.cta}</button>
-    </div>`).join('') : '<div class="skeleton-msg" style="color:rgba(255,255,255,0.6);">No plans yet</div>';
+  // Members
+  const memberFiles = ['ahmed-al-rashid.md'];
+  const members = (await loadContent('members', memberFiles))
+    .filter(m => m.name)
+    .sort((a,b) => (a.order||99) - (b.order||99));
 
-  const scheduleFiles = ['slot-1.md','slot-2.md','slot-3.md','slot-4.md'];
-  const slots = await loadFolder('schedule', scheduleFiles);
-  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  document.getElementById('schedule-week').innerHTML = days.map((d, i) => `
-    <div class="schedule-day ${i === 1 ? 'active' : ''}">
-      <div class="schedule-day-name">${d}</div>
-      <div class="schedule-day-num">${9 + i}</div>
+  const memGrid = document.getElementById('members-grid');
+  // Fallback to hardcoded if no members loaded
+  const memberData = members.length > 0 ? members : [
+    {name:'Ahmed Al-Rashid',role:'Chairman',initials:'AH',color:'navy'},
+    {name:'Sara Rahman',role:'Secretary',initials:'SR',color:'sky'},
+    {name:'Khalid Mansour',role:'Treasurer',initials:'KM',color:'teal'},
+    {name:'Layla Al-Hassan',role:'Events Lead',initials:'LA',color:'purple'},
+    {name:'Omar Jaber',role:'Communications',initials:'OJ',color:'red'},
+    {name:'Nadia Aziz',role:'Membership',initials:'NA',color:'amber'},
+    {name:'Faisal Al-Khatib',role:'Tech & App',initials:'FK',color:'blue'},
+    {name:'Rima Saleh',role:'Volunteer Lead',initials:'RS',color:'green'},
+  ];
+  memGrid.innerHTML = memberData.map(m => `
+    <div class="member-card">
+      <div class="member-avatar" style="background:${COLORS[m.color]||COLORS.navy}">${m.initials||m.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</div>
+      <div class="member-name">${m.name}</div>
+      <div class="member-role">${m.role}</div>
     </div>`).join('');
-  document.querySelectorAll('.schedule-day').forEach(day => {
-    day.addEventListener('click', () => {
-      document.querySelectorAll('.schedule-day').forEach(d => d.classList.remove('active'));
-      day.classList.add('active');
-    });
-  });
-  document.getElementById('schedule-list').innerHTML = slots.length ? slots.map(sl => `
-    <div class="schedule-row">
-      <div class="schedule-time">${sl.time}</div>
-      <div>
-        <div class="schedule-sport-name">${sl.sport}</div>
-        <div class="schedule-sport-meta">${sl.meta}</div>
-      </div>
-      <span class="schedule-age-tag">${sl.age_tag}</span>
-    </div>`).join('') : '<div class="skeleton-msg">No schedule slots</div>';
+  memGrid.querySelectorAll('.member-card').forEach(revealObserve);
 
-  const testiFiles = ['nadia-featured.md','rana.md','khalid.md','reem.md','yara.md'];
-  const testis = await loadFolder('testimonials', testiFiles);
-  const tg = document.getElementById('testimonials-grid');
-  tg.innerHTML = testis.length ? testis.map(t => `
-    <div class="testi-card ${t.featured ? 'featured' : ''}">
-      ${t.featured ? '<div class="testi-quote-mark">"</div>' : ''}
-      <div class="testi-stars">${'★'.repeat(t.rating || 5).split('').map(s => `<span>${s}</span>`).join('')}</div>
-      <div class="testi-text">${t.quote}</div>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background: ${COLORS[t.color] || COLORS.royal}; ${t.color === 'sun' ? 'color: var(--ink);' : ''}">${t.initials}</div>
-        <div>
-          <div class="testi-name">${t.name}</div>
-          <div class="testi-role">${t.role}</div>
+  // News
+  const newsFiles = ['app-launch.md','gala-tickets.md'];
+  const newsItems = (await loadContent('news', newsFiles))
+    .filter(n => n.title)
+    .sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  const newsGrid = document.getElementById('news-grid');
+  const featured = newsItems.find(n => n.featured) || newsItems[0];
+  const rest = newsItems.filter(n => n !== featured).slice(0, 3);
+
+  if (featured) {
+    newsGrid.innerHTML = `
+      <div class="news-featured">
+        <div class="news-featured-pattern"></div>
+        <div class="news-featured-content">
+          <div class="news-tag">${featured.category || 'News'}</div>
+          <div class="news-featured-title">${featured.title}</div>
+          <div class="news-featured-date">${fmtDate(featured.date)}</div>
         </div>
       </div>
-    </div>`).join('') : '<div class="skeleton-msg">No reviews yet</div>';
+      <div class="news-list">
+        ${rest.map(n => `
+          <div class="news-item">
+            <div class="news-item-tag">${n.category||'News'}</div>
+            <div class="news-item-title">${n.title}</div>
+            <div class="news-item-date">${fmtDate(n.date)}</div>
+          </div>`).join('')}
+      </div>`;
+  }
 
-  const newsFiles = ['u14-cup.md','app-launch.md','summer-camp-open.md'];
-  const news = (await loadFolder('news', newsFiles)).sort((a, b) => new Date(b.date) - new Date(a.date));
-  const ng = document.getElementById('news-grid');
-  ng.innerHTML = news.length ? news.map(n => `
-    <div class="news-card">
-      <div class="news-image ${n.color}">
-        ${n.image ? `<img src="${n.image}" alt="${n.title}">` : `<div class="news-image-emoji">${n.emoji}</div>`}
-        <span class="news-cat-badge">${n.category}</span>
-      </div>
-      <div class="news-body">
-        <div class="news-date">${fmtDate(n.date)}</div>
-        <h3 class="news-title">${n.title}</h3>
-        <p class="news-excerpt">${n.excerpt}</p>
-      </div>
-    </div>`).join('') : '<div class="skeleton-msg">No news yet</div>';
-
-  document.getElementById('trial-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const inputs = e.target.querySelectorAll('input, select');
-    const parent = inputs[0].value;
-    const phone = inputs[1].value;
-    const child = inputs[2].value;
-    const age = inputs[3].value;
-    const sport = inputs[4].value;
-    const wa = (c && c.whatsapp) || '966110000000';
-    const msg = encodeURIComponent(`Hi! I'd like to book a free trial.\n\nParent: ${parent}\nPhone: ${phone}\nChild: ${child}\nAge: ${age}\nSport: ${sport}`);
-    window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-  });
+  // Gallery — placeholder colored tiles (real images added via CMS)
+  const galleryColors = ['#1a3560','#0284c7','#0f766e','#7c3aed','#b45309'];
+  const galCaptions = ['Annual Gala 2025','Photography Walk','Family Picnic Day','Charity Drive','Awards Night'];
+  const galGrid = document.getElementById('gallery-grid');
+  galGrid.innerHTML = galleryColors.map((c,i) => `
+    <div class="gallery-item">
+      <div class="gallery-item-bg" style="background:linear-gradient(135deg,${c},#0f2040);"></div>
+      <div class="gallery-overlay"><span class="gallery-overlay-text">${galCaptions[i]}</span></div>
+    </div>`).join('');
+  galGrid.querySelectorAll('.gallery-item').forEach(revealObserve);
 }
 
 init();
 
-document.querySelector('.nav-hamburger')?.addEventListener('click', function() {
+// ── Mobile nav ────────────────────────────────────────────────────────────────
+function toggleMenu() {
   const links = document.querySelector('.nav-links');
   const open = links.style.display === 'flex';
-  if (open) { links.style.display = ''; }
-  else {
-    Object.assign(links.style, {
-      display: 'flex', flexDirection: 'column',
-      position: 'fixed', top: '76px', left: '0', right: '0',
-      background: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(14px)',
-      padding: '20px 5%', gap: '4px', borderBottom: '1px solid var(--line)', zIndex: '99'
-    });
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.style.display = '', { once: true }));
-  }
-});
+  Object.assign(links.style, {
+    display: open ? 'none' : 'flex', flexDirection: 'column',
+    position: 'fixed', top: '68px', left: '0', right: '0',
+    background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(12px)',
+    padding: '16px 5%', borderBottom: '1px solid #e2e8f0', gap: '4px'
+  });
+  if (!open) links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.style.display = 'none'));
+}
 </script>
 </body>
 </html>
