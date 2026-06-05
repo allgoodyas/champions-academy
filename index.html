@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Champions Academy — Where kids find their champion within</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0a1a3a;
+    --ink-soft: #475569;
+    --ink-mute: #94a3b8;
+    --royal: #2563eb;
+    --royal-deep: #1d4ed8;
+    --royal-pale: #dbeafe;
+    --coral: #ff4d6d;
+    --coral-soft: #ff7a92;
+    --sun: #ffd60a;
+    --sun-deep: #f59e0b;
+    --cloud: #f8fafc;
+    --line: #e6eaf3;
+    --white: #ffffff;
+    --display: 'Archivo', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --shadow: 0 8px 32px rgba(10,26,58,0.08);
+    --shadow-lg: 0 20px 60px rgba(10,26,58,0.12);
+    --shadow-coral: 0 10px 30px rgba(255,77,109,0.25);
+    --shadow-royal: 0 10px 30px rgba(37,99,235,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--white); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  .topbar { background: var(--ink); color: var(--white); text-align: center; padding: 9px 24px; font-size: 0.78rem; letter-spacing: 0.05em; font-weight: 500; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 14px 5%; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-mark { width: 40px; height: 40px; background: var(--royal); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-royal); transition: transform 0.3s ease; }
+  .nav-logo:hover .nav-logo-mark { transform: rotate(-12deg); }
+  .nav-logo-mark svg { width: 22px; height: 22px; fill: var(--white); }
+  .nav-logo-text { font-family: var(--display); font-size: 1.15rem; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; }
+  .nav-logo-text span { color: var(--coral); }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: 0.9rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; transition: all 0.2s; }
+  .nav-links a:hover { background: var(--royal-pale); color: var(--royal); }
+  .nav-cta { background: var(--coral) !important; color: var(--white) !important; padding: 10px 20px !important; border-radius: 100px !important; box-shadow: var(--shadow-coral); transition: all 0.25s !important; display: inline-flex !important; align-items: center; gap: 6px; }
+  .nav-cta:hover { background: var(--coral-soft) !important; transform: translateY(-1px); }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; gap: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+  .hero { position: relative; padding: 80px 5% 100px; overflow: hidden; background: linear-gradient(180deg, var(--cloud) 0%, var(--white) 100%); }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; pointer-events: none; }
+  .hero-orb.o1 { width: 420px; height: 420px; background: var(--royal); opacity: 0.16; top: -120px; right: -100px; }
+  .hero-orb.o2 { width: 340px; height: 340px; background: var(--coral); opacity: 0.18; bottom: -100px; left: -80px; }
+  .hero-orb.o3 { width: 180px; height: 180px; background: var(--sun); opacity: 0.30; top: 30%; left: 35%; }
+  .hero-shape { position: absolute; z-index: 1; pointer-events: none; }
+  .hero-shape.sq { width: 60px; height: 60px; background: var(--sun); border-radius: 14px; top: 18%; right: 32%; transform: rotate(15deg); box-shadow: 0 10px 30px rgba(255,214,10,0.3); animation: floatA 5s ease-in-out infinite; }
+  .hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; max-width: 1300px; margin: 0 auto; }
+  .hero-text { animation: fadeUp 0.8s ease both; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--royal); font-size: 0.8rem; font-weight: 700; padding: 8px 16px; border-radius: 100px; margin-bottom: 24px; border: 1px solid var(--royal-pale); box-shadow: 0 4px 12px rgba(37,99,235,0.08); }
+  .hero-tag-dot { width: 7px; height: 7px; background: var(--royal); border-radius: 50%; box-shadow: 0 0 0 4px rgba(37,99,235,0.2); animation: pulse 2s ease-in-out infinite; }
+  .hero-title { font-family: var(--display); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 0.98; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 22px; }
+  .hero-title em { font-style: italic; color: var(--coral); font-weight: 800; position: relative; display: inline-block; }
+  .hero-title em::after { content: ''; position: absolute; bottom: 6px; left: 0; right: 0; height: 14px; background: var(--sun); z-index: -1; opacity: 0.55; border-radius: 4px; transform: skewX(-6deg); }
+  .hero-sub { font-size: 1.1rem; color: var(--ink-soft); max-width: 480px; line-height: 1.65; margin-bottom: 36px; font-weight: 500; }
+  .hero-cta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--coral); color: var(--white); padding: 16px 32px; border-radius: 100px; text-decoration: none; font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; border: none; cursor: pointer; font-family: var(--sans); box-shadow: var(--shadow-coral); }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+  .btn-ghost { color: var(--ink); padding: 16px 24px; text-decoration: none; font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: color 0.25s; }
+  .btn-ghost:hover { color: var(--royal); }
+  .hero-trust { margin-top: 48px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .hero-trust-text { font-size: 0.85rem; color: var(--ink-soft); font-weight: 500; }
+  .hero-trust-text b { color: var(--ink); font-weight: 800; }
+  .hero-trust-text .stars { color: var(--sun-deep); margin-right: 4px; }
+
+  .hero-visual { position: relative; aspect-ratio: 1; max-width: 520px; margin: 0 auto; animation: fadeIn 1s ease both 0.2s; }
+  .hero-vis-main { inset: 6% 6% 6% 6%; background: var(--royal); border-radius: 32px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: absolute; box-shadow: var(--shadow-lg); }
+  .hero-vis-main::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.3), transparent 60%); }
+  .hero-vis-main img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; }
+  .hero-vis-emoji { font-size: 9rem; position: relative; z-index: 2; animation: bounceY 3.5s ease-in-out infinite; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.25)); }
+  .hero-vis-stat { position: absolute; background: white; border-radius: 18px; padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 12px; }
+  .hero-vis-stat.s1 { top: -10px; left: -10px; animation: floatA 5s ease-in-out infinite; }
+  .hero-vis-stat.s2 { bottom: 8%; right: -16px; animation: floatB 5s ease-in-out infinite 0.5s; }
+  .hero-vis-stat-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+  .hero-vis-stat.s1 .hero-vis-stat-icon { background: var(--coral); }
+  .hero-vis-stat.s2 .hero-vis-stat-icon { background: var(--sun); }
+  .hero-vis-stat-num { font-family: var(--display); font-size: 1.5rem; font-weight: 900; color: var(--ink); line-height: 1; }
+  .hero-vis-stat-lbl { font-size: 0.72rem; color: var(--ink-mute); font-weight: 600; letter-spacing: 0.04em; margin-top: 2px; }
+
+  .offers-strip { background: var(--ink); color: var(--white); padding: 24px 5%; position: relative; overflow: hidden; }
+  .offers-strip-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .offer-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 20px 22px; display: flex; align-items: center; gap: 16px; transition: all 0.25s; cursor: pointer; }
+  .offer-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); border-color: var(--sun); }
+  .offer-card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+  .offer-card-icon.o1 { background: var(--coral); }
+  .offer-card-icon.o2 { background: var(--sun); }
+  .offer-card-icon.o3 { background: var(--royal); }
+  .offer-card-text { flex: 1; }
+  .offer-card-title { font-family: var(--display); font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 3px; }
+  .offer-card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.6); font-weight: 500; }
+  .offer-card-badge { background: var(--sun); color: var(--ink); padding: 4px 10px; border-radius: 100px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+
+  section { padding: 100px 5%; position: relative; }
+  .section-header { max-width: 720px; margin-bottom: 60px; }
+  .section-header.center { text-align: center; margin: 0 auto 60px; }
+  .section-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 800; color: var(--royal); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px; padding: 6px 14px; background: var(--royal-pale); border-radius: 100px; }
+  .section-title { font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900; line-height: 1.02; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 18px; }
+  .section-title em { font-style: italic; color: var(--coral); font-weight: 800; }
+  .section-sub { font-size: 1.05rem; color: var(--ink-soft); max-width: 560px; line-height: 1.65; font-weight: 500; }
+  .section-header.center .section-sub { margin: 0 auto; }
+
+  #sports { background: var(--cloud); }
+  .sports-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1300px; margin: 0 auto; }
+  .sport-card { background: white; border-radius: 24px; padding: 28px 24px; position: relative; overflow: hidden; cursor: pointer; transition: all 0.35s ease; border: 1px solid var(--line); }
+  .sport-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: 24px 24px 0 0; }
+  .sport-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .sport-card.royal::before { background: var(--royal); }
+  .sport-card.coral::before { background: var(--coral); }
+  .sport-card.sun::before { background: var(--sun); }
+  .sport-card.ink::before { background: var(--ink); }
+  .sport-card.royal-coral::before { background: linear-gradient(90deg, var(--royal), var(--coral)); }
+  .sport-card.coral-sun::before { background: linear-gradient(90deg, var(--coral), var(--sun)); }
+  .sport-card.sun-royal::before { background: linear-gradient(90deg, var(--sun), var(--royal)); }
+  .sport-card.ink-royal::before { background: linear-gradient(90deg, var(--ink), var(--royal)); }
+  .sport-emoji-wrap { width: 70px; height: 70px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; font-size: 2.4rem; overflow: hidden; }
+  .sport-emoji-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .sport-card.royal .sport-emoji-wrap, .sport-card.royal-coral .sport-emoji-wrap { background: var(--royal-pale); }
+  .sport-card.coral .sport-emoji-wrap, .sport-card.coral-sun .sport-emoji-wrap { background: #ffe4ea; }
+  .sport-card.sun .sport-emoji-wrap, .sport-card.sun-royal .sport-emoji-wrap { background: #fff8d1; }
+  .sport-card.ink .sport-emoji-wrap, .sport-card.ink-royal .sport-emoji-wrap { background: #e2e8f0; }
+  .sport-name { font-family: var(--display); font-size: 1.4rem; font-weight: 900; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.02em; }
+  .sport-meta { font-size: 0.85rem; color: var(--ink-soft); font-weight: 600; margin-bottom: 16px; }
+  .sport-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .sport-pill { font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; background: var(--cloud); color: var(--ink-soft); }
+  .sport-cta { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px dashed var(--line); }
+  .sport-price { font-family: var(--display); font-size: 1rem; font-weight: 800; color: var(--ink); }
+  .sport-price span { font-size: 0.75rem; font-weight: 600; color: var(--ink-mute); }
+  .sport-link { color: var(--royal); font-size: 0.85rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.25s; }
+  .sport-card:hover .sport-link { gap: 8px; }
+
+  #programs { background: var(--white); }
+  .programs-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1300px; margin: 0 auto; }
+  .programs-schedule { background: var(--cloud); border-radius: 28px; padding: 32px; position: relative; overflow: hidden; }
+  .schedule-week { display: flex; gap: 6px; margin-bottom: 24px; }
+  .schedule-day { flex: 1; text-align: center; padding: 12px 6px; border-radius: 12px; background: white; border: 1px solid var(--line); transition: all 0.2s; cursor: pointer; }
+  .schedule-day.active { background: var(--ink); border-color: var(--ink); }
+  .schedule-day.active .schedule-day-name { color: var(--white); }
+  .schedule-day.active .schedule-day-num { color: var(--sun); }
+  .schedule-day-name { font-size: 0.7rem; color: var(--ink-mute); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+  .schedule-day-num { font-family: var(--display); font-size: 1.3rem; color: var(--ink); font-weight: 800; line-height: 1; }
+  .schedule-list { display: flex; flex-direction: column; gap: 12px; }
+  .schedule-row { display: grid; grid-template-columns: 70px 1fr auto; gap: 16px; align-items: center; background: white; border-radius: 14px; padding: 14px 18px; }
+  .schedule-time { font-family: var(--display); font-weight: 800; color: var(--royal); font-size: 0.9rem; }
+  .schedule-sport-name { font-family: var(--display); font-weight: 700; color: var(--ink); font-size: 1rem; letter-spacing: -0.01em; }
+  .schedule-sport-meta { font-size: 0.78rem; color: var(--ink-soft); font-weight: 500; margin-top: 2px; }
+  .schedule-age-tag { background: var(--royal-pale); color: var(--royal); padding: 4px 10px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; }
+  .programs-content .section-eyebrow { background: #ffe4ea; color: var(--coral); }
+
+  #coaches { background: var(--cloud); }
+  .coaches-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; max-width: 1300px; margin: 0 auto; }
+  .coach-card { background: white; border-radius: 24px; overflow: hidden; transition: all 0.3s ease; }
+  .coach-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+  .coach-photo { aspect-ratio: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .coach-photo.bg1 { background: linear-gradient(135deg, var(--royal), #1d4ed8); }
+  .coach-photo.bg2 { background: linear-gradient(135deg, var(--coral), #d61f69); }
+  .coach-photo.bg3 { background: linear-gradient(135deg, var(--ink), #2d3a5f); }
+  .coach-photo.bg4 { background: linear-gradient(135deg, var(--sun-deep), var(--sun)); }
+  .coach-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .coach-monogram { font-family: var(--display); font-size: 4.5rem; color: rgba(255,255,255,0.95); font-weight: 900; font-style: italic; letter-spacing: -0.05em; }
+  .coach-sport-badge { position: absolute; top: 14px; right: 14px; background: white; border-radius: 100px; padding: 5px 12px; font-size: 0.7rem; font-weight: 800; color: var(--ink); }
+  .coach-cert { position: absolute; bottom: 14px; left: 14px; background: var(--sun); border-radius: 8px; padding: 5px 10px; font-size: 0.68rem; font-weight: 800; color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase; }
+  .coach-body { padding: 22px 22px 24px; }
+  .coach-name { font-family: var(--display); font-size: 1.2rem; font-weight: 800; color: var(--ink); margin-bottom: 3px; }
+  .coach-title { font-size: 0.82rem; color: var(--royal); font-weight: 700; margin-bottom: 14px; }
+  .coach-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .coach-tag { font-size: 0.68rem; background: var(--cloud); color: var(--ink-soft); padding: 4px 10px; border-radius: 100px; font-weight: 700; }
+  .coach-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .coach-stat-n { font-family: var(--display); font-size: 1.2rem; font-weight: 900; color: var(--coral); line-height: 1; }
+  .coach-stat-l { font-size: 0.7rem; color: var(--ink-mute); font-weight: 600; margin-top: 3px; }
+
+  #offers-section { background: var(--ink); color: white; position: relative; overflow: hidden; }
+  #offers-section::before { content: ''; position: absolute; width: 500px; height: 500px; background: var(--royal); opacity: 0.18; border-radius: 50%; filter: blur(120px); top: -150px; left: -100px; }
+  #offers-section::after { content: ''; position: absolute; width: 400px; height: 400px; background: var(--coral); opacity: 0.2; border-radius: 50%; filter: blur(100px); bottom: -150px; right: -50px; }
+  #offers-section .section-eyebrow { background: rgba(255,214,10,0.15); color: var(--sun); }
+  #offers-section .section-title { color: white; }
+  #offers-section .section-title em { color: var(--sun); }
+  #offers-section .section-sub { color: rgba(255,255,255,0.7); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+  .price-card { background: white; color: var(--ink); border-radius: 28px; padding: 36px 32px; position: relative; transition: all 0.3s ease; }
+  .price-card:hover { transform: translateY(-6px); }
+  .price-card.popular { background: linear-gradient(135deg, var(--royal) 0%, var(--royal-deep) 100%); color: white; transform: scale(1.04); box-shadow: 0 30px 80px rgba(37,99,235,0.4); }
+  .price-card-badge { position: absolute; top: -14px; right: 24px; background: var(--sun); color: var(--ink); padding: 6px 14px; border-radius: 100px; font-family: var(--display); font-size: 0.78rem; font-weight: 800; }
+  .price-card-name { font-family: var(--display); font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .price-card-desc { font-size: 0.88rem; opacity: 0.7; margin-bottom: 28px; }
+  .price-amount-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .price-old { font-family: var(--display); font-size: 1.2rem; color: var(--ink-mute); text-decoration: line-through; font-weight: 600; }
+  .price-card.popular .price-old { color: rgba(255,255,255,0.5); }
+  .price-new { font-family: var(--display); font-size: 2.6rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+  .price-period { font-size: 0.85rem; opacity: 0.6; font-weight: 600; margin-bottom: 24px; }
+  .price-save { display: inline-block; background: var(--coral); color: white; padding: 4px 12px; border-radius: 100px; font-size: 0.72rem; font-weight: 800; margin-bottom: 24px; }
+  .price-card.popular .price-save { background: var(--sun); color: var(--ink); }
+  .price-list { list-style: none; margin-bottom: 30px; }
+  .price-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.9rem; padding: 8px 0; font-weight: 500; }
+  .price-list li::before { content: '✓'; color: var(--coral); font-weight: 900; font-size: 1rem; flex-shrink: 0; }
+  .price-card.popular .price-list li::before { color: var(--sun); }
+  .price-cta { width: 100%; background: var(--ink); color: white; border: none; cursor: pointer; padding: 16px; border-radius: 100px; font-family: var(--sans); font-size: 0.92rem; font-weight: 700; transition: all 0.25s; }
+  .price-cta:hover { background: var(--coral); }
+  .price-card.popular .price-cta { background: var(--sun); color: var(--ink); }
+  .price-card.popular .price-cta:hover { background: white; }
+
+  #enroll { background: white; position: relative; }
+  .enroll-card { max-width: 1100px; margin: 0 auto; background: var(--cloud); border-radius: 32px; padding: 60px 56px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; position: relative; overflow: hidden; }
+  .enroll-card::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--coral); opacity: 0.18; border-radius: 50%; filter: blur(70px); top: -120px; right: -100px; }
+  .enroll-content { position: relative; z-index: 2; }
+  .enroll-content .section-title { font-size: 2.4rem; margin-bottom: 16px; }
+  .enroll-bullets { list-style: none; margin-top: 24px; }
+  .enroll-bullets li { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-weight: 500; color: var(--ink-soft); }
+  .enroll-form { position: relative; z-index: 2; background: white; border-radius: 24px; padding: 36px 34px; box-shadow: var(--shadow-lg); }
+  .enroll-form-title { font-family: var(--display); font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+  .enroll-form-sub { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 22px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-label { font-size: 0.78rem; font-weight: 700; color: var(--ink); text-transform: uppercase; letter-spacing: 0.04em; }
+  .form-input, .form-select { padding: 13px 16px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--cloud); font-family: var(--sans); font-size: 0.92rem; color: var(--ink); outline: none; width: 100%; }
+  .form-input:focus, .form-select:focus { border-color: var(--royal); background: white; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-submit-trial { width: 100%; background: var(--coral); color: white; border: none; cursor: pointer; padding: 15px; border-radius: 100px; font-family: var(--sans); font-size: 0.95rem; font-weight: 800; margin-top: 8px; transition: all 0.25s; box-shadow: var(--shadow-coral); }
+  .form-submit-trial:hover { background: var(--ink); }
+
+  #testimonials { background: var(--cloud); position: relative; overflow: hidden; }
+  .testimonials-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 24px; max-width: 1300px; margin: 0 auto; }
+  .testi-card { background: white; border-radius: 24px; padding: 32px 30px; position: relative; transition: all 0.3s ease; }
+  .testi-card.featured { background: var(--ink); color: white; grid-row: span 2; }
+  .testi-quote-mark { font-family: var(--display); font-size: 4rem; line-height: 0.5; color: var(--royal); margin-bottom: 18px; font-weight: 900; font-style: italic; }
+  .testi-card.featured .testi-quote-mark { color: var(--sun); }
+  .testi-stars { display: flex; gap: 2px; margin-bottom: 16px; }
+  .testi-stars span { color: var(--sun-deep); font-size: 1rem; }
+  .testi-card.featured .testi-stars span { color: var(--sun); }
+  .testi-text { font-family: var(--display); font-weight: 700; line-height: 1.35; margin-bottom: 20px; color: var(--ink); font-size: 1rem; }
+  .testi-card.featured .testi-text { color: white; font-size: 1.5rem; }
+  .testi-author { display: flex; align-items: center; gap: 14px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .testi-card.featured .testi-author { border-top-color: rgba(255,255,255,0.12); }
+  .testi-avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; color: white; font-size: 1rem; }
+  .testi-name { font-weight: 800; font-size: 0.9rem; }
+  .testi-role { font-size: 0.78rem; opacity: 0.65; font-weight: 600; margin-top: 2px; }
+  .achievements-bar { max-width: 1300px; margin: 50px auto 0; background: white; border-radius: 24px; padding: 32px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .achievement { text-align: center; border-right: 1px solid var(--line); padding-right: 24px; }
+  .achievement:last-child { border-right: none; }
+  .achievement-num { font-family: var(--display); font-size: 2.4rem; font-weight: 900; color: var(--coral); line-height: 1; letter-spacing: -0.03em; }
+  .achievement-label { font-size: 0.82rem; color: var(--ink-soft); font-weight: 600; margin-top: 6px; }
+
+  #news { background: white; }
+  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1300px; margin: 0 auto; }
+  .news-card { background: var(--cloud); border-radius: 24px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; }
+  .news-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+  .news-image { aspect-ratio: 16/9; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .news-image.b1 { background: linear-gradient(135deg, var(--royal) 0%, #1d4ed8 100%); }
+  .news-image.b2 { background: linear-gradient(135deg, var(--coral) 0%, #d61f69 100%); }
+  .news-image.b3 { background: linear-gradient(135deg, var(--sun-deep) 0%, var(--sun) 100%); }
+  .news-image img { width: 100%; height: 100%; object-fit: cover; }
+  .news-image-emoji { font-size: 4rem; opacity: 0.85; }
+  .news-cat-badge { position: absolute; top: 16px; left: 16px; background: white; color: var(--ink); padding: 5px 12px; border-radius: 100px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; }
+  .news-body { padding: 24px 26px 26px; }
+  .news-date { font-size: 0.78rem; color: var(--ink-mute); font-weight: 600; margin-bottom: 8px; }
+  .news-title { font-family: var(--display); font-size: 1.2rem; font-weight: 800; color: var(--ink); line-height: 1.25; margin-bottom: 12px; }
+  .news-excerpt { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.6; margin-bottom: 16px; }
+
+  #contact { background: var(--cloud); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; max-width: 1300px; margin: 0 auto; }
+  .contact-block { background: white; border-radius: 28px; padding: 44px 40px; }
+  .contact-block.portal { background: var(--ink); color: white; position: relative; overflow: hidden; }
+  .contact-block.portal::before { content: ''; position: absolute; width: 280px; height: 280px; background: var(--royal); opacity: 0.3; border-radius: 50%; filter: blur(70px); top: -100px; right: -50px; }
+  .contact-block-h { font-family: var(--display); font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+  .contact-block.portal .contact-block-h em { color: var(--sun); font-style: italic; }
+  .contact-block-sub { font-size: 0.95rem; opacity: 0.7; margin-bottom: 28px; line-height: 1.6; }
+  .contact-block:not(.portal) .contact-block-sub { color: var(--ink-soft); opacity: 1; }
+  .contact-items { display: flex; flex-direction: column; gap: 18px; margin-bottom: 28px; }
+  .contact-row { display: flex; gap: 14px; align-items: center; }
+  .contact-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--royal-pale); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .contact-block.portal .contact-icon { background: rgba(255,214,10,0.15); }
+  .contact-row-label { font-size: 0.75rem; color: var(--ink-mute); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+  .contact-block.portal .contact-row-label { color: rgba(255,255,255,0.55); }
+  .contact-row-value { font-size: 0.95rem; font-weight: 600; }
+  .contact-whatsapp { background: #25d366; color: white; border-radius: 100px; padding: 14px 24px; text-decoration: none; font-weight: 700; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 10px; transition: all 0.25s; box-shadow: 0 8px 24px rgba(37,211,102,0.25); }
+  .contact-whatsapp:hover { background: #1aaf52; transform: translateY(-2px); }
+  .portal-features { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
+  .portal-feature { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+  .portal-feature-check { width: 24px; height: 24px; background: var(--coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.7rem; flex-shrink: 0; font-weight: 800; }
+  .portal-login-btn { width: 100%; background: var(--sun); color: var(--ink); border: none; cursor: pointer; padding: 16px; border-radius: 100px; font-family: var(--sans); font-size: 0.95rem; font-weight: 800; text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.25s; position: relative; z-index: 2; margin-top: 8px; }
+  .portal-login-btn:hover { background: white; }
+
+  footer { background: var(--ink); color: white; padding: 80px 5% 36px; position: relative; overflow: hidden; }
+  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 56px; max-width: 1300px; margin: 0 auto; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .footer-brand-desc { font-size: 0.92rem; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 320px; margin-top: 14px; }
+  .footer-col-title { font-family: var(--display); font-size: 0.95rem; font-weight: 800; color: white; margin-bottom: 18px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .footer-links a:hover { color: var(--sun); }
+  .footer-bottom { max-width: 1300px; margin: 28px auto 0; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 0.85rem; color: rgba(255,255,255,0.4); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes floatA { 0%, 100% { transform: translateY(0) rotate(15deg); } 50% { transform: translateY(-14px) rotate(15deg); } }
+  @keyframes floatB { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes bounceY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 4px rgba(37,99,235,0.2); } 50% { box-shadow: 0 0 0 8px rgba(37,99,235,0.1); } }
+
+  .skeleton-msg { text-align: center; padding: 40px; color: var(--ink-mute); grid-column: 1/-1; }
+
+  @media (max-width: 1024px) {
+    .hero-inner, .programs-layout, .enroll-card, .contact-layout { grid-template-columns: 1fr; gap: 50px; }
+    .sports-grid, .coaches-grid { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid, .news-grid { grid-template-columns: repeat(2, 1fr); }
+    .price-card.popular { transform: scale(1); }
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    .testi-card.featured { grid-column: span 2; grid-row: span 1; }
+    .achievements-bar { grid-template-columns: repeat(2, 1fr); }
+    .achievement { border-right: none; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    section { padding: 70px 5%; }
+    .sports-grid, .coaches-grid, .pricing-grid, .news-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testi-card.featured { grid-column: span 1; }
+    .enroll-card { padding: 36px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">Loading…</div>
+
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 1l2.5 7h7.5l-6 4.5 2.5 7.5-6.5-4.5-6.5 4.5 2.5-7.5-6-4.5h7.5z"/></svg>
+    </div>
+    <span class="nav-logo-text" id="nav-name">Champions<span>.</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sports">Sports</a></li>
+    <li><a href="#programs">Schedule</a></li>
+    <li><a href="#coaches">Coaches</a></li>
+    <li><a href="#offers-section">Offers</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#enroll" class="nav-cta">⚡ Book Free Trial</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-orb o1"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-orb o3"></div>
+  <div class="hero-shape sq"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag"><span class="hero-tag-dot"></span><span id="hero-tag-text">Loading…</span></div>
+      <h1 class="hero-title"><span id="hero-t1">Loading</span><br><em id="hero-t2">…</em>.</h1>
+      <p class="hero-sub" id="hero-sub">Loading…</p>
+      <div class="hero-cta">
+        <a href="#enroll" class="btn-primary">Book a Free Trial →</a>
+        <a href="#sports" class="btn-ghost">Explore Sports</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-text">
+          <span class="stars">★★★★★</span><b id="hero-trust">Loading…</b>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-vis-main"><div class="hero-vis-emoji" id="hero-vis-emoji">⚽</div></div>
+      <div class="hero-vis-stat s1">
+        <div class="hero-vis-stat-icon">🏆</div>
+        <div><div class="hero-vis-stat-num" id="stat1-n">8</div><div class="hero-vis-stat-lbl" id="stat1-l">Sports</div></div>
+      </div>
+      <div class="hero-vis-stat s2">
+        <div class="hero-vis-stat-icon">👥</div>
+        <div><div class="hero-vis-stat-num" id="stat2-n">24</div><div class="hero-vis-stat-lbl" id="stat2-l">Coaches</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="offers-strip"><div class="offers-strip-inner" id="offers-strip"><div class="skeleton-msg">Loading offers…</div></div></div>
+
+<section id="sports">
+  <div class="section-header center">
+    <div class="section-eyebrow" id="sports-eyebrow">⚽ What we coach</div>
+    <h2 class="section-title"><span id="sports-title-1">8 sports,</span> <em id="sports-title-2">endless growth</em></h2>
+    <p class="section-sub" id="sports-sub">From your child's first ever lesson to competitive tournament training.</p>
+  </div>
+  <div class="sports-grid" id="sports-grid"><div class="skeleton-msg">Loading sports…</div></div>
+</section>
+
+<section id="programs">
+  <div class="programs-layout">
+    <div class="programs-schedule">
+      <div class="schedule-week" id="schedule-week"></div>
+      <div class="schedule-list" id="schedule-list"><div class="skeleton-msg">Loading schedule…</div></div>
+    </div>
+    <div class="programs-content">
+      <div class="section-eyebrow">📅 Programs &amp; schedule</div>
+      <h2 class="section-title">A program for <em>every age &amp; level</em></h2>
+      <p class="section-sub">From learn-to-play groups for little ones to high-performance competitive squads — we meet your child where they are.</p>
+    </div>
+  </div>
+</section>
+
+<section id="coaches">
+  <div class="section-header center">
+    <div class="section-eyebrow">👨‍🏫 Our coaches</div>
+    <h2 class="section-title">Certified, <em>passionate</em>, &amp; here for your kids</h2>
+    <p class="section-sub">Every coach is licensed, background-checked, and shares one belief — kids learn fastest when they're having fun.</p>
+  </div>
+  <div class="coaches-grid" id="coaches-grid"><div class="skeleton-msg">Loading coaches…</div></div>
+</section>
+
+<section id="offers-section">
+  <div class="section-header center">
+    <div class="section-eyebrow">💰 Pricing &amp; offers</div>
+    <h2 class="section-title">Simple plans, <em>big savings</em></h2>
+    <p class="section-sub">Pick a single sport or unlock all 8 with our Multi-Sport Pass.</p>
+  </div>
+  <div class="pricing-grid" id="pricing-grid"><div class="skeleton-msg" style="color:rgba(255,255,255,0.6);">Loading plans…</div></div>
+</section>
+
+<section id="enroll">
+  <div class="enroll-card">
+    <div class="enroll-content">
+      <div class="section-eyebrow">⚡ Free trial</div>
+      <h2 class="section-title">Try us out — <em>on the house</em></h2>
+      <p class="section-sub">One free trial session in any sport. No payment, no commitment.</p>
+      <ul class="enroll-bullets">
+        <li>✓ 60-minute trial session</li>
+        <li>✓ Meet your child's coach in person</li>
+        <li>✓ Free skill assessment included</li>
+        <li>✓ Honest enrollment advice — no pressure</li>
+      </ul>
+    </div>
+    <form class="enroll-form" id="trial-form">
+      <div class="enroll-form-title">Book your free trial</div>
+      <div class="enroll-form-sub">We'll confirm within 2 hours on WhatsApp.</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Parent's name</label><input class="form-input" type="text" required></div>
+        <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Child's name</label><input class="form-input" type="text" required></div>
+        <div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" min="5" max="18" required></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Choose sport</label>
+        <select class="form-select" id="trial-sport"></select>
+      </div>
+      <button type="submit" class="form-submit-trial">Book my free trial →</button>
+    </form>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-header center">
+    <div class="section-eyebrow">💬 What parents say</div>
+    <h2 class="section-title">Real reviews from <em>real families</em></h2>
+  </div>
+  <div class="testimonials-grid" id="testimonials-grid"><div class="skeleton-msg">Loading reviews…</div></div>
+  <div class="achievements-bar" id="achievements-bar"></div>
+</section>
+
+<section id="news">
+  <div class="section-header center">
+    <div class="section-eyebrow">📰 Latest news</div>
+    <h2 class="section-title">Academy <em>updates &amp; wins</em></h2>
+  </div>
+  <div class="news-grid" id="news-grid"><div class="skeleton-msg">Loading news…</div></div>
+</section>
+
+<section id="contact">
+  <div class="section-header center">
+    <div class="section-eyebrow">📞 Get in touch</div>
+    <h2 class="section-title">Talk to us, or <em>jump into the portal</em></h2>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-block">
+      <div class="contact-block-h">Visit us or say hi</div>
+      <div class="contact-block-sub">We're open 7 days a week. Drop in for a tour anytime.</div>
+      <div class="contact-items">
+        <div class="contact-row">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-row-label">Our location</div><div class="contact-row-value" id="c-addr">—</div></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📞</div>
+          <div><div class="contact-row-label">Call us</div><div class="contact-row-value" id="c-phone">—</div></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📧</div>
+          <div><div class="contact-row-label">Email</div><div class="contact-row-value" id="c-email">—</div></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">🕐</div>
+          <div><div class="contact-row-label">Open hours</div><div class="contact-row-value" id="c-hours">—</div></div>
+        </div>
+      </div>
+      <a href="#" id="c-wa" class="contact-whatsapp">💬 Chat with us on WhatsApp</a>
+    </div>
+    <div class="contact-block portal">
+      <div class="contact-block-h">Parent &amp; Student <em>Portal</em></div>
+      <div class="contact-block-sub">Existing families: log into the Champions Support App to view your schedule, attendance, fees, and coach updates.</div>
+      <div class="portal-features">
+        <div class="portal-feature"><div class="portal-feature-check">✓</div>View weekly training schedule</div>
+        <div class="portal-feature"><div class="portal-feature-check">✓</div>Track attendance &amp; progress</div>
+        <div class="portal-feature"><div class="portal-feature-check">✓</div>Pay fees online securely</div>
+        <div class="portal-feature"><div class="portal-feature-check">✓</div>Read your coach's session notes</div>
+        <div class="portal-feature"><div class="portal-feature-check">✓</div>Sign up for tournaments &amp; camps</div>
+      </div>
+      <a href="#" id="c-app" class="portal-login-btn">🔐 Login to Champions App</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#home" class="nav-logo">
+        <div class="nav-logo-mark"><svg viewBox="0 0 24 24"><path fill="white" d="M12 1l2.5 7h7.5l-6 4.5 2.5 7.5-6.5-4.5-6.5 4.5 2.5-7.5-6-4.5h7.5z"/></svg></div>
+        <span class="nav-logo-text" style="color:white;" id="footer-name">Champions<span>.</span></span>
+      </a>
+      <p class="footer-brand-desc">Building young champions, one session at a time. 8 sports. 24 certified coaches. One academy that actually cares.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Sports</div>
+      <ul class="footer-links" id="footer-sports"></ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Academy</div>
+      <ul class="footer-links">
+        <li><a href="#coaches">Our coaches</a></li>
+        <li><a href="#programs">Schedule</a></li>
+        <li><a href="#offers-section">Pricing &amp; offers</a></li>
+        <li><a href="#testimonials">Parent reviews</a></li>
+        <li><a href="#news">News &amp; results</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">For families</div>
+      <ul class="footer-links">
+        <li><a href="#enroll">Book free trial</a></li>
+        <li><a href="#contact">Contact &amp; WhatsApp</a></li>
+        <li><a href="#contact">Parent portal login</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© <span id="yr"></span> Champions Academy · All rights reserved</span>
+    <span class="footer-copy">Built with ❤️ for young athletes</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", user => {
+    if (!user) {
+      window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+    }
+  });
+}
+
+const COLORS = { royal: '#2563eb', coral: '#ff4d6d', sun: '#ffd60a', ink: '#0a1a3a' };
+
+function parseFrontMatter(text) {
+  const match = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  const obj = {};
+  let curKey = null;
+  let inList = false;
+  match[1].split('\n').forEach(line => {
+    if (inList && line.match(/^\s*-\s/)) {
+      let val = line.replace(/^\s*-\s/, '').trim().replace(/^["']|["']$/g, '');
+      if (!Array.isArray(obj[curKey])) obj[curKey] = [];
+      obj[curKey].push(val);
+      return;
+    }
+    inList = false;
+    const idx = line.indexOf(':');
+    if (idx === -1) return;
+    const key = line.slice(0, idx).trim();
+    let val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
+    curKey = key;
+    if (val === '') { inList = true; obj[key] = []; return; }
+    if (val === 'true') val = true;
+    else if (val === 'false') val = false;
+    else if (!isNaN(val) && val !== '') val = Number(val);
+    obj[key] = val;
+  });
+  return obj;
+}
+
+async function fetchJSON(p) { try { const r = await fetch(p); return r.ok ? r.json() : null; } catch { return null; } }
+async function fetchMD(p) { try { const r = await fetch(p); return r.ok ? parseFrontMatter(await r.text()) : null; } catch { return null; } }
+async function loadFolder(folder, files) {
+  const results = [];
+  for (const f of files) {
+    const d = await fetchMD(`/content/${folder}/${f}`);
+    if (d && d.published !== false) results.push(d);
+  }
+  return results.sort((a, b) => (a.order || 99) - (b.order || 99));
+}
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+async function init() {
+  const s = await fetchJSON('/content/settings/general.json');
+  if (s) {
+    document.getElementById('topbar').textContent = s.topbar || '';
+    document.getElementById('hero-tag-text').textContent = s.hero_tag || '';
+    document.getElementById('hero-t1').textContent = s.hero_title_1 || '';
+    document.getElementById('hero-t2').textContent = s.hero_title_2 || '';
+    document.getElementById('hero-sub').textContent = s.hero_sub || '';
+    document.getElementById('hero-trust').textContent = s.trust_rating || '';
+    document.getElementById('stat1-n').textContent = s.stat1_num;
+    document.getElementById('stat1-l').textContent = s.stat1_lbl;
+    document.getElementById('stat2-n').textContent = s.stat2_num;
+    document.getElementById('stat2-l').textContent = s.stat2_lbl;
+    if (s.hero_image) {
+      document.getElementById('hero-vis-emoji').outerHTML = `<img src="${s.hero_image}" alt="Hero" />`;
+    }
+    if (s.academy_name) {
+      document.title = s.academy_name + ' — Where kids find their champion within';
+    }
+  }
+
+  const c = await fetchJSON('/content/settings/contact.json');
+  if (c) {
+    document.getElementById('c-addr').textContent = c.address || '';
+    document.getElementById('c-phone').textContent = c.phone || '';
+    document.getElementById('c-email').textContent = c.email || '';
+    document.getElementById('c-hours').textContent = c.hours || '';
+    document.getElementById('c-wa').href = `https://wa.me/${c.whatsapp || ''}`;
+    document.getElementById('c-app').href = c.app_url || '#';
+  }
+
+  const ach = await fetchJSON('/content/settings/achievements.json');
+  if (ach && ach.items) {
+    document.getElementById('achievements-bar').innerHTML = ach.items.map(i =>
+      `<div class="achievement"><div class="achievement-num">${i.num}</div><div class="achievement-label">${i.lbl}</div></div>`
+    ).join('');
+  }
+
+  const sportFiles = ['football.md','tennis.md','badminton.md','swimming.md','cricket.md','basketball.md','table-tennis.md','karate.md'];
+  const sports = await loadFolder('sports', sportFiles);
+  const sg = document.getElementById('sports-grid');
+  if (sports.length) {
+    sg.innerHTML = sports.map(sp => `
+      <div class="sport-card ${sp.color}">
+        <div class="sport-emoji-wrap">${sp.image ? `<img src="${sp.image}" alt="${sp.name}">` : sp.emoji}</div>
+        <div class="sport-name">${sp.name}</div>
+        <div class="sport-meta">${sp.ages} · ${sp.level}</div>
+        <div class="sport-pills">${(sp.tags || []).map(t => `<span class="sport-pill">${t}</span>`).join('')}</div>
+        <div class="sport-cta">
+          <span class="sport-price">$${sp.price}<span>/mo</span></span>
+          <a href="#enroll" class="sport-link">Details →</a>
+        </div>
+      </div>`).join('');
+    const ts = document.getElementById('trial-sport');
+    ts.innerHTML = sports.map(sp => `<option>${sp.emoji} ${sp.name}</option>`).join('') + '<option>Not sure — recommend one</option>';
+    document.getElementById('footer-sports').innerHTML = sports.slice(0, 4).map(sp => `<li><a href="#sports">${sp.name}</a></li>`).join('') + '<li><a href="#sports">View all sports</a></li>';
+  } else {
+    sg.innerHTML = '<div class="skeleton-msg">No sports yet — admin can add them in /admin</div>';
+  }
+
+  const offerFiles = ['free-trial.md','summer-camp.md','sibling.md'];
+  const offers = await loadFolder('offers', offerFiles);
+  const os = document.getElementById('offers-strip');
+  os.innerHTML = offers.length ? offers.map(o => `
+    <div class="offer-card">
+      <div class="offer-card-icon ${o.color}">${o.emoji}</div>
+      <div class="offer-card-text">
+        <div class="offer-card-title">${o.title}</div>
+        <div class="offer-card-sub">${o.subtitle}</div>
+      </div>
+      <span class="offer-card-badge">${o.badge}</span>
+    </div>`).join('') : '<div class="skeleton-msg" style="color:rgba(255,255,255,0.5);">No offers active</div>';
+
+  const coachFiles = ['faisal-al-khatib.md','layla-al-hassan.md','omar-jaber.md','sara-rahman.md'];
+  const coaches = await loadFolder('coaches', coachFiles);
+  const cg = document.getElementById('coaches-grid');
+  cg.innerHTML = coaches.length ? coaches.map(co => `
+    <div class="coach-card">
+      <div class="coach-photo ${co.bg}">
+        ${co.photo ? `<img src="${co.photo}" alt="${co.name}">` : `<div class="coach-monogram">${co.initials}</div>`}
+        <div class="coach-sport-badge">${co.sport_label}</div>
+        <div class="coach-cert">${co.certification}</div>
+      </div>
+      <div class="coach-body">
+        <div class="coach-name">${co.name}</div>
+        <div class="coach-title">${co.title}</div>
+        <div class="coach-tags">${(co.tags || []).map(t => `<span class="coach-tag">${t}</span>`).join('')}</div>
+        <div class="coach-stats">
+          <div><div class="coach-stat-n">${co.years}</div><div class="coach-stat-l">Yrs coaching</div></div>
+          <div><div class="coach-stat-n">${co.achievement_num}</div><div class="coach-stat-l">${co.achievement_lbl}</div></div>
+        </div>
+      </div>
+    </div>`).join('') : '<div class="skeleton-msg">No coaches yet</div>';
+
+  const priceFiles = ['single-sport.md','multi-sport.md','family-plan.md'];
+  const plans = await loadFolder('pricing', priceFiles);
+  const pg = document.getElementById('pricing-grid');
+  pg.innerHTML = plans.length ? plans.map(p => `
+    <div class="price-card ${p.popular ? 'popular' : ''}">
+      ${p.popular ? `<span class="price-card-badge">${p.popular_badge || '⭐ Most popular'}</span>` : ''}
+      <div class="price-card-name">${p.name}</div>
+      <div class="price-card-desc">${p.desc}</div>
+      <div class="price-amount-row">
+        ${p.price_old ? `<span class="price-old">$${p.price_old}</span>` : ''}
+        <span class="price-new">$${p.price_new}</span>
+      </div>
+      <div class="price-period">${p.period}</div>
+      ${p.save_badge ? `<span class="price-save">${p.save_badge}</span>` : ''}
+      <ul class="price-list">${(p.features || []).map(f => `<li>${f}</li>`).join('')}</ul>
+      <button class="price-cta" onclick="document.getElementById('enroll').scrollIntoView({behavior:'smooth'})">${p.cta}</button>
+    </div>`).join('') : '<div class="skeleton-msg" style="color:rgba(255,255,255,0.6);">No plans yet</div>';
+
+  const scheduleFiles = ['slot-1.md','slot-2.md','slot-3.md','slot-4.md'];
+  const slots = await loadFolder('schedule', scheduleFiles);
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  document.getElementById('schedule-week').innerHTML = days.map((d, i) => `
+    <div class="schedule-day ${i === 1 ? 'active' : ''}">
+      <div class="schedule-day-name">${d}</div>
+      <div class="schedule-day-num">${9 + i}</div>
+    </div>`).join('');
+  document.querySelectorAll('.schedule-day').forEach(day => {
+    day.addEventListener('click', () => {
+      document.querySelectorAll('.schedule-day').forEach(d => d.classList.remove('active'));
+      day.classList.add('active');
+    });
+  });
+  document.getElementById('schedule-list').innerHTML = slots.length ? slots.map(sl => `
+    <div class="schedule-row">
+      <div class="schedule-time">${sl.time}</div>
+      <div>
+        <div class="schedule-sport-name">${sl.sport}</div>
+        <div class="schedule-sport-meta">${sl.meta}</div>
+      </div>
+      <span class="schedule-age-tag">${sl.age_tag}</span>
+    </div>`).join('') : '<div class="skeleton-msg">No schedule slots</div>';
+
+  const testiFiles = ['nadia-featured.md','rana.md','khalid.md','reem.md','yara.md'];
+  const testis = await loadFolder('testimonials', testiFiles);
+  const tg = document.getElementById('testimonials-grid');
+  tg.innerHTML = testis.length ? testis.map(t => `
+    <div class="testi-card ${t.featured ? 'featured' : ''}">
+      ${t.featured ? '<div class="testi-quote-mark">"</div>' : ''}
+      <div class="testi-stars">${'★'.repeat(t.rating || 5).split('').map(s => `<span>${s}</span>`).join('')}</div>
+      <div class="testi-text">${t.quote}</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: ${COLORS[t.color] || COLORS.royal}; ${t.color === 'sun' ? 'color: var(--ink);' : ''}">${t.initials}</div>
+        <div>
+          <div class="testi-name">${t.name}</div>
+          <div class="testi-role">${t.role}</div>
+        </div>
+      </div>
+    </div>`).join('') : '<div class="skeleton-msg">No reviews yet</div>';
+
+  const newsFiles = ['u14-cup.md','app-launch.md','summer-camp-open.md'];
+  const news = (await loadFolder('news', newsFiles)).sort((a, b) => new Date(b.date) - new Date(a.date));
+  const ng = document.getElementById('news-grid');
+  ng.innerHTML = news.length ? news.map(n => `
+    <div class="news-card">
+      <div class="news-image ${n.color}">
+        ${n.image ? `<img src="${n.image}" alt="${n.title}">` : `<div class="news-image-emoji">${n.emoji}</div>`}
+        <span class="news-cat-badge">${n.category}</span>
+      </div>
+      <div class="news-body">
+        <div class="news-date">${fmtDate(n.date)}</div>
+        <h3 class="news-title">${n.title}</h3>
+        <p class="news-excerpt">${n.excerpt}</p>
+      </div>
+    </div>`).join('') : '<div class="skeleton-msg">No news yet</div>';
+
+  document.getElementById('trial-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const inputs = e.target.querySelectorAll('input, select');
+    const parent = inputs[0].value;
+    const phone = inputs[1].value;
+    const child = inputs[2].value;
+    const age = inputs[3].value;
+    const sport = inputs[4].value;
+    const wa = (c && c.whatsapp) || '966110000000';
+    const msg = encodeURIComponent(`Hi! I'd like to book a free trial.\n\nParent: ${parent}\nPhone: ${phone}\nChild: ${child}\nAge: ${age}\nSport: ${sport}`);
+    window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
+  });
+}
+
+init();
+
+document.querySelector('.nav-hamburger')?.addEventListener('click', function() {
+  const links = document.querySelector('.nav-links');
+  const open = links.style.display === 'flex';
+  if (open) { links.style.display = ''; }
+  else {
+    Object.assign(links.style, {
+      display: 'flex', flexDirection: 'column',
+      position: 'fixed', top: '76px', left: '0', right: '0',
+      background: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(14px)',
+      padding: '20px 5%', gap: '4px', borderBottom: '1px solid var(--line)', zIndex: '99'
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.style.display = '', { once: true }));
+  }
+});
+</script>
+</body>
+</html>
