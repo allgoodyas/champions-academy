@@ -1,0 +1,191 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://championsacademy.netlify.app
+display_url: https://championsacademy.netlify.app
+logo_url: https://championsacademy.netlify.app/images/logo.png
+
+collections:
+
+  - name: "settings"
+    label: "🏠 Site Settings"
+    files:
+      - name: "general"
+        label: "Site Info, Hero & Stats"
+        file: "content/settings/general.json"
+        fields:
+          - { label: "Academy Name", name: "academy_name", widget: "string" }
+          - { label: "Announcement Bar Text", name: "topbar", widget: "string", hint: "e.g. FREE TRIAL WEEK · Save 25% · Ends June 30" }
+          - { label: "Hero Tag Line", name: "hero_tag", widget: "string", hint: "Small badge above hero title" }
+          - { label: "Hero Title (line 1)", name: "hero_title_1", widget: "string" }
+          - { label: "Hero Title (line 2 — highlighted)", name: "hero_title_2", widget: "string", hint: "This appears in coral italic with yellow highlight" }
+          - { label: "Hero Subtitle", name: "hero_sub", widget: "text" }
+          - { label: "Stat 1 Number", name: "stat1_num", widget: "string", default: "8" }
+          - { label: "Stat 1 Label", name: "stat1_lbl", widget: "string", default: "Sports offered" }
+          - { label: "Stat 2 Number", name: "stat2_num", widget: "string", default: "24" }
+          - { label: "Stat 2 Label", name: "stat2_lbl", widget: "string", default: "Expert coaches" }
+          - { label: "Trust Rating", name: "trust_rating", widget: "string", default: "4.9 from 200+ parents" }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false, hint: "Optional photo to replace the football emoji" }
+
+      - name: "contact"
+        label: "Contact Info"
+        file: "content/settings/contact.json"
+        fields:
+          - { label: "Address", name: "address", widget: "text" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Open Hours", name: "hours", widget: "string", hint: "e.g. 7 days · 8:00 AM — 10:00 PM" }
+          - { label: "WhatsApp Number (international format)", name: "whatsapp", widget: "string", hint: "e.g. 966110000000 (no + sign)" }
+          - { label: "Club Support App URL", name: "app_url", widget: "string", hint: "URL where parents/students login" }
+
+      - name: "about"
+        label: "About Section"
+        file: "content/settings/about.json"
+        fields:
+          - { label: "About Eyebrow", name: "eyebrow", widget: "string", default: "About us" }
+          - { label: "About Title (plain)", name: "title_plain", widget: "string" }
+          - { label: "About Title (highlighted)", name: "title_highlight", widget: "string" }
+          - { label: "About Subtitle", name: "sub", widget: "text" }
+
+  - name: "sports"
+    label: "⚽ Sports"
+    folder: "content/sports"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Sport Name", name: "name", widget: "string" }
+      - { label: "Emoji Icon", name: "emoji", widget: "string", hint: "e.g. ⚽ 🎾 🏸 🏊 🏏 🏀 🏓 🥋" }
+      - { label: "Age Range", name: "ages", widget: "string", default: "Ages 6–18" }
+      - { label: "Skill Level", name: "level", widget: "string", default: "All levels" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["Beginner", "Advanced"], hint: "Short pills shown below the name" }
+      - { label: "Monthly Price (USD)", name: "price", widget: "number", value_type: "int", default: 80 }
+      - { label: "Color Theme", name: "color", widget: "select", options: ["royal", "coral", "sun", "ink", "royal-coral", "coral-sun", "sun-royal", "ink-royal"], default: "royal", hint: "Top accent stripe color" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Cover Image", name: "image", widget: "image", required: false, hint: "Optional photo (replaces the emoji)" }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "coaches"
+    label: "👨‍🏫 Coaches"
+    folder: "content/coaches"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Full Name", name: "name", widget: "string" }
+      - { label: "Title / Role", name: "title", widget: "string", hint: "e.g. Head Football Coach" }
+      - { label: "Initials (2 letters)", name: "initials", widget: "string", hint: "Used in monogram if no photo" }
+      - { label: "Sport Coached", name: "sport_label", widget: "string", hint: "e.g. ⚽ Football" }
+      - { label: "Certification Badge", name: "certification", widget: "string", hint: "e.g. AFC License, ITF Level 2, BWF Level 2" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["Certified", "10 yrs"], hint: "Short credibility tags" }
+      - { label: "Years Coaching", name: "years", widget: "string", default: "10" }
+      - { label: "Achievement Number", name: "achievement_num", widget: "string", default: "8" }
+      - { label: "Achievement Label", name: "achievement_lbl", widget: "string", default: "Trophies won" }
+      - { label: "Photo", name: "photo", widget: "image", required: false }
+      - { label: "Background Color", name: "bg", widget: "select", options: ["bg1", "bg2", "bg3", "bg4"], default: "bg1", hint: "bg1=blue, bg2=coral, bg3=navy, bg4=amber" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "offers"
+    label: "🎁 Top Offers Strip"
+    folder: "content/offers"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Emoji Icon", name: "emoji", widget: "string", default: "🎁" }
+      - { label: "Offer Title", name: "title", widget: "string", hint: "e.g. First Trial Free" }
+      - { label: "Subtitle", name: "subtitle", widget: "string", hint: "e.g. No commitment, no card" }
+      - { label: "Badge Text", name: "badge", widget: "string", hint: "e.g. 100% off, Save 25%" }
+      - { label: "Color", name: "color", widget: "select", options: ["o1", "o2", "o3"], default: "o1", hint: "o1=coral, o2=sun, o3=royal" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "pricing"
+    label: "💰 Pricing Plans"
+    folder: "content/pricing"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Plan Name", name: "name", widget: "string" }
+      - { label: "Description", name: "desc", widget: "string" }
+      - { label: "Old Price", name: "price_old", widget: "string", required: false, hint: "Optional — for showing crossed-out price" }
+      - { label: "New Price ($)", name: "price_new", widget: "string", hint: "Just the number, e.g. 120" }
+      - { label: "Period Label", name: "period", widget: "string", default: "per month, per student" }
+      - { label: "Save Badge", name: "save_badge", widget: "string", required: false, hint: "e.g. SAVE $40/mo" }
+      - { label: "Features", name: "features", widget: "list", hint: "One feature per line" }
+      - { label: "CTA Button Text", name: "cta", widget: "string", default: "Get started" }
+      - { label: "Mark as Popular", name: "popular", widget: "boolean", default: false }
+      - { label: "Popular Badge Text", name: "popular_badge", widget: "string", default: "⭐ Most popular", required: false }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "schedule"
+    label: "📅 Weekly Schedule"
+    folder: "content/schedule"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Day", name: "day", widget: "select", options: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] }
+      - { label: "Time", name: "time", widget: "string", hint: "e.g. 4:00 PM" }
+      - { label: "Sport (with emoji)", name: "sport", widget: "string", hint: "e.g. ⚽ Football · Pitch 1" }
+      - { label: "Coach & Duration", name: "meta", widget: "string", hint: "e.g. Coach Faisal · 60 min session" }
+      - { label: "Age Tag", name: "age_tag", widget: "string", default: "All ages" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "testimonials"
+    label: "💬 Parent Reviews"
+    folder: "content/testimonials"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Quote", name: "quote", widget: "text" }
+      - { label: "Parent Name", name: "name", widget: "string" }
+      - { label: "Initials (for avatar)", name: "initials", widget: "string" }
+      - { label: "Role / Context", name: "role", widget: "string", hint: "e.g. Parent · Football · 2 years with us" }
+      - { label: "Rating", name: "rating", widget: "number", value_type: "int", default: 5, min: 1, max: 5 }
+      - { label: "Featured (big card)", name: "featured", widget: "boolean", default: false, hint: "Only mark ONE as featured at a time" }
+      - { label: "Avatar Color", name: "color", widget: "select", options: ["royal", "coral", "sun", "ink"], default: "royal" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 99 }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "news"
+    label: "📰 News & Updates"
+    folder: "content/news"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Tournament", "Announcement", "Camp", "Update", "Community"] }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD MMM YYYY", time_format: false }
+      - { label: "Emoji Icon", name: "emoji", widget: "string", default: "🏆", hint: "Shows in the image area if no photo" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
+      - { label: "Color Theme", name: "color", widget: "select", options: ["b1", "b2", "b3"], default: "b1", hint: "b1=royal, b2=coral, b3=sun" }
+      - { label: "Display Order", name: "order", widget: "number", value_type: "int", default: 0 }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "achievements"
+    label: "🏆 Achievement Bar"
+    files:
+      - name: "achievements"
+        label: "Bottom Achievement Stats"
+        file: "content/settings/achievements.json"
+        fields:
+          - label: "Achievements"
+            name: "items"
+            widget: "list"
+            max: 4
+            min: 4
+            fields:
+              - { label: "Number", name: "num", widget: "string" }
+              - { label: "Label", name: "lbl", widget: "string" }
